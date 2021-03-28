@@ -3,7 +3,7 @@ using UnityEngine;
 public class SwipeDetection : MonoBehaviour {
 
     [SerializeField] private InputManager inputManager;
-    [SerializeField] private float minSwpieDistance = 0.2f;
+    [SerializeField] private float minSwipeDistance = 0.2f;
     [SerializeField] private float maxSwipeTime = 1f;
     [SerializeField, Range(0, 1)] private float directionTreshhold = 0.7f;
     private Vector2 startPosition;
@@ -37,7 +37,7 @@ public class SwipeDetection : MonoBehaviour {
     }
 
     private void DetectSwipe() {
-        if (Vector3.Distance(startPosition, endPosition) >= minSwpieDistance &&
+        if (Vector3.Distance(startPosition, endPosition) >= minSwipeDistance &&
         (endTime - startTime) <= maxSwipeTime) {
             Vector3 direction = endPosition - startPosition;
             Vector2 direction2D = new Vector2(direction.x, direction.y).normalized;

@@ -39,7 +39,6 @@ public class PlayerTile : MonoBehaviour {
     private Vector3 SetNextWaypoint(Vector3 direction) {
         bool isChecked = false;
         while (!isChecked) {
-
             Vector3 prevPos = movePoint.transform.position;
             movePoint.transform.position = movePoint.transform.position + new Vector3(direction.x, direction.y, direction.z);
             if (tilesManager.tiles.Find(tilePos => tilePos.position == movePoint.transform.position)) {
