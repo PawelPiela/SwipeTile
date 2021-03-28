@@ -1126,6 +1126,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputManager: {fileID: 1235419112}
+  tilesManager: {fileID: 1564314009}
+  isLevelReady: 0
 --- !u!114 &907572040
 MonoBehaviour:
   m_ObjectHideFlags: 0

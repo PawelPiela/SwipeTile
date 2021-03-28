@@ -15,9 +15,9 @@ public class Tile : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.gameObject.tag == "Player") {
-            ChangeColor();
+        if (collision.gameObject.tag == "Player" && spriteRenderer.color != Color.white) {
             RemoveTileFromList();
+            Invoke("ChangeColor", 0.1f);
         }
     }
 
