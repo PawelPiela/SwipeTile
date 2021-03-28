@@ -12,9 +12,11 @@ public class PlayerTile : MonoBehaviour {
     private Vector3 targetPos;
     public int moveCount = 0;
 
+
     private void Start() {
         movePoint.transform.position = transform.position;
         movePoint.transform.parent = null;
+
     }
     private void Update() {
         MenageMovement();
@@ -37,23 +39,27 @@ public class PlayerTile : MonoBehaviour {
     }
 
     private Vector3 SetNextWaypoint(Vector3 direction) {
-        bool isChecked = false;
-        while (!isChecked) {
+        bool isMoveFinished = false;
+        while (!isMoveFinished) {
             Vector3 prevPos = movePoint.transform.position;
             movePoint.transform.position = movePoint.transform.position + new Vector3(direction.x, direction.y, direction.z);
             if (tilesManager.tiles.Find(tilePos => tilePos.position == movePoint.transform.position)) {
                 targetPos = movePoint.transform.position;
             } else {
                 movePoint.transform.position = new Vector3(prevPos.x, prevPos.y, prevPos.z);
-                isChecked = true;
+                isMoveFinished = true;
             }
         }
         return targetPos;
     }
 
-    private void MovementInput() {
+    private void MovementInput() { 
+        if (isMoving) {
+            SwipeDetection.SwipedDirection = direction;
+        }
         if (!isMoving) {
             direction = SwipeDetection.SwipedDirection;
         }
     }
+
 }

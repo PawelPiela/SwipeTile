@@ -13,6 +13,7 @@ public class SwipeDetection : MonoBehaviour {
     private static Vector2 swipedDirection;
     public static Vector2 SwipedDirection {
         get { return swipedDirection; }
+        set { swipedDirection = value; }
     }
 
     private void OnEnable() {
@@ -24,6 +25,7 @@ public class SwipeDetection : MonoBehaviour {
         inputManager.OnStartTouch -= SwipeStart;
         inputManager.OnEndTouch -= SwipeEnd;
     }
+
 
     private void SwipeStart(Vector2 position, float time) {
         startPosition = position;
@@ -45,8 +47,8 @@ public class SwipeDetection : MonoBehaviour {
 
         }
     }
-
     private void SwipeDirection(Vector2 direction) {
+
         if (Vector2.Dot(Vector2.up, direction) > directionTreshhold) {
             Debug.Log("Swipe up");
             swipedDirection = Vector2.up;

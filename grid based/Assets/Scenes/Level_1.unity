@@ -525,7 +525,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 7
+  orthographic size: 8
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1125,6 +1125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e97416d5fd5ef93429f12347e6e8a4a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputManager: {fileID: 1235419112}
 --- !u!114 &907572040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1138,14 +1139,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colors:
-  - {r: 0.028301895, g: 0.027634397, b: 0.027634397, a: 0}
-  - {r: 0.4384624, g: 0.6415094, b: 0.20274118, a: 1}
-  - {r: 0.08116765, g: 0.5616318, b: 0.9056604, a: 1}
-  - {r: 0.5890093, g: 0.20879315, b: 0.8679245, a: 1}
-  - {r: 0.23589355, g: 0.26674405, b: 0.2924528, a: 1}
-  - {r: 0.38679248, g: 0.045612313, b: 0.08793983, a: 1}
-  - {r: 0.22524703, g: 0.08317016, b: 0.8396226, a: 1}
-  - {r: 0.9056604, g: 0.12388753, b: 0.1837822, a: 1}
+  - {r: 0.6862745, g: 0.121568635, b: 0.5647059, a: 1}
+  - {r: 0, g: 0.03137255, b: 0.27450982, a: 1}
+  - {r: 0, g: 0.27450982, b: 0.5411765, a: 1}
+  - {r: 0, g: 0.58431375, b: 0.2392157, a: 1}
+  - {r: 0.69803923, g: 0.78823537, b: 0.03137255, a: 1}
+  - {r: 1, g: 0.27058825, b: 0, a: 1}
+  - {r: 0.87843144, g: 0, b: 0.043137256, a: 1}
+  - {r: 0.69803923, g: 0.13333334, b: 0.13333334, a: 1}
   mainCamera: {fileID: 519420031}
   playerTileRenderer: {fileID: 3590933201460937777}
 --- !u!1001 &982152729
@@ -1597,9 +1598,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputManager: {fileID: 1235419112}
-  minSwpieDistance: 0.2
+  minSwipeDistance: 0.2
   maxSwipeTime: 1
-  directionTreshhold: 0.7
+  directionTreshhold: 0.9
 --- !u!114 &1235419112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2648,7 +2649,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3590933202253216114, guid: bb7599bb0223ffb4c856297930fc1295, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3590933202253216114, guid: bb7599bb0223ffb4c856297930fc1295, type: 3}
       propertyPath: m_LocalPosition.z
