@@ -3,6 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TilesManager : MonoBehaviour {
-    public List<Transform> tiles = new List<Transform>();
-    public List<Transform> tilesLeft = new List<Transform>();
+    public List<Transform> Tiles = new List<Transform>();
+    public List<Transform> TilesLeft = new List<Transform>();
 }

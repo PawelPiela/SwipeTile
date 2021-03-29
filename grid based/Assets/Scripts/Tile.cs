@@ -10,8 +10,8 @@ public class Tile : MonoBehaviour {
     private void Awake() {
         tilesManager = gameObject.GetComponentInParent<TilesManager>();
         spriteRenderer = transform.GetComponent<SpriteRenderer>();
-        tilesManager.tiles.Add(this.transform);
-        tilesManager.tilesLeft.Add(this.transform);
+        tilesManager.Tiles.Add(this.transform);
+        tilesManager.TilesLeft.Add(this.transform);
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
@@ -25,7 +25,7 @@ public class Tile : MonoBehaviour {
         spriteRenderer.color = Color.white;
     }
     private void RemoveTileFromList() {
-        tilesManager.tilesLeft.Remove(this.transform);
+        tilesManager.TilesLeft.Remove(this.transform);
     }
 
 }

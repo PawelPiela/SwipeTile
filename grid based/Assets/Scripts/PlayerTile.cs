@@ -43,7 +43,7 @@ public class PlayerTile : MonoBehaviour {
         while (!isMoveFinished) {
             Vector3 prevPos = movePoint.transform.position;
             movePoint.transform.position = movePoint.transform.position + new Vector3(direction.x, direction.y, direction.z);
-            if (tilesManager.tiles.Find(tilePos => tilePos.position == movePoint.transform.position)) {
+            if (tilesManager.Tiles.Find(tilePos => tilePos.position == movePoint.transform.position)) {
                 targetPos = movePoint.transform.position;
             } else {
                 movePoint.transform.position = new Vector3(prevPos.x, prevPos.y, prevPos.z);
