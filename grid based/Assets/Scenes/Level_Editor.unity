@@ -1420,6 +1420,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 552980014}
+  - component: {fileID: 552980015}
   m_Layer: 0
   m_Name: Editor_logic
   m_TagString: Untagged
@@ -1441,6 +1442,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &552980015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 552980013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0038e281304cb2644b72ca0594403d9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tile: {fileID: 6126765783177579799, guid: 8a8b67cafc66e3341b3f3c4551db927f, type: 3}
 --- !u!1001 &562584109
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1577,7 +1591,6 @@ GameObject:
   - component: {fileID: 616591546}
   - component: {fileID: 616591545}
   - component: {fileID: 616591544}
-  - component: {fileID: 616591543}
   - component: {fileID: 616591547}
   m_Layer: 5
   m_Name: Set player position button
@@ -1606,18 +1619,6 @@ RectTransform:
   m_AnchoredPosition: {x: 200, y: -500}
   m_SizeDelta: {x: 250, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &616591543
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 616591541}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ff72f487752da0449614bd36aff5ded, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &616591544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1798,7 +1799,6 @@ GameObject:
   - component: {fileID: 656748291}
   - component: {fileID: 656748290}
   - component: {fileID: 656748289}
-  - component: {fileID: 656748288}
   - component: {fileID: 656748292}
   m_Layer: 5
   m_Name: Save level button
@@ -1827,18 +1827,6 @@ RectTransform:
   m_AnchoredPosition: {x: -200, y: -700}
   m_SizeDelta: {x: 250, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &656748288
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 656748286}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ff72f487752da0449614bd36aff5ded, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &656748289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3783,7 +3771,6 @@ GameObject:
   - component: {fileID: 1539914956}
   - component: {fileID: 1539914955}
   - component: {fileID: 1539914954}
-  - component: {fileID: 1539914953}
   m_Layer: 5
   m_Name: New level button
   m_TagString: Untagged
@@ -3811,18 +3798,6 @@ RectTransform:
   m_AnchoredPosition: {x: -200, y: -500}
   m_SizeDelta: {x: 250, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1539914953
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1539914951}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ff72f487752da0449614bd36aff5ded, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1539914954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4041,7 +4016,6 @@ GameObject:
   - component: {fileID: 1616931173}
   - component: {fileID: 1616931172}
   - component: {fileID: 1616931171}
-  - component: {fileID: 1616931170}
   m_Layer: 5
   m_Name: Load level button
   m_TagString: Untagged
@@ -4069,18 +4043,6 @@ RectTransform:
   m_AnchoredPosition: {x: -200, y: -600}
   m_SizeDelta: {x: 250, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1616931170
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1616931168}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ff72f487752da0449614bd36aff5ded, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1616931171
 MonoBehaviour:
   m_ObjectHideFlags: 0
