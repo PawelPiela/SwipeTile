@@ -9,5 +9,6 @@ public class EditorTile : MonoBehaviour
         editorTilesManager = transform.GetComponent<EditorTilesManager>();
     }
     
+    
 
 }
