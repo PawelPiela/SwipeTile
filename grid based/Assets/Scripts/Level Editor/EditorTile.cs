@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class EditorTile : MonoBehaviour
 {
-    [SerializeField] private EditorTilesManager editorTilesManager; 
+    
+    [SerializeField] private EditorTilesManager editorTilesManager;
+    
     private SpriteRenderer spriteRenderer;
     private Color defaultColor = Color.white;
     private Color clickedColor = Color.red;
@@ -18,22 +20,24 @@ public class EditorTile : MonoBehaviour
     
     
     private void Awake() {
-        //editorTilesManager = transform.GetComponent<EditorTilesManager>();
+        
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         spriteRenderer.color = defaultColor;
+        editorTilesManager.EditorTiles.Clear();
     }
-    public void Clicked() {
-        Debug.Log(AddedToList);
+    public void OnClick() {
         if (!addedToList) {
             addedToList = true;
             editorTilesManager.EditorTiles.Add(this.transform);
             spriteRenderer.color = clickedColor;
+            Debug.Log(editorTilesManager.EditorTiles.Count);
         }
 
         else if (addedToList) {
             addedToList = false;
             editorTilesManager.EditorTiles.Remove(this.transform);
             spriteRenderer.color = defaultColor;
+            Debug.Log(editorTilesManager.EditorTiles.Count);
         }
     }
 

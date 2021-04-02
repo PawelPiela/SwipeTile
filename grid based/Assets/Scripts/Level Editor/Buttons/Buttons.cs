@@ -6,5 +6,6 @@ public class Buttons : MonoBehaviour
 {
     public virtual void ClickButton(){
         
+        
     }
 }

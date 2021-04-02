@@ -5,8 +5,7 @@ using UnityEngine;
 public class MouseInput : MonoBehaviour
 {
     private MouseClick controls;
-    [SerializeField] private Camera mainCamera;
-    [SerializeField] private Transform tile;
+    private Camera mainCamera;
 
     private void Awake() {
         controls = new MouseClick();
@@ -27,12 +26,11 @@ public class MouseInput : MonoBehaviour
     
     private void ClickOnTile() {
         Vector2 mousePosition = controls.Mouse.MousePosition.ReadValue<Vector2>();
-        //Vector2 mousePosition = Input.mousePosition;
         mousePosition = mainCamera.ScreenToWorldPoint(mousePosition);
         RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
         if (hit.transform != null) {
             Debug.Log(hit.transform.name);
-            hit.collider.GetComponent<EditorTile>().Clicked();
+            hit.collider.GetComponent<EditorTile>().OnClick();
 
         }
     }

@@ -6,8 +6,5 @@ public class EditorTilesManager : MonoBehaviour
 {
     
     public List<Transform> EditorTiles = new List<Transform>();
-    void Start()
-    {
-        
-    }    
+      
 }
