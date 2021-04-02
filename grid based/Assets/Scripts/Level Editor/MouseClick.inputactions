@@ -15,7 +15,7 @@
                 },
                 {
                     "name": "MousePosition",
-                    "type": "PassThrough",
+                    "type": "Value",
                     "id": "c116a9f0-8897-4a2f-a171-3b212a70a2a1",
                     "expectedControlType": "Vector2",
                     "processors": "",
@@ -37,7 +37,7 @@
                 {
                     "name": "",
                     "id": "e5c90230-4b12-4595-bb54-bb8c3060c53d",
-                    "path": "",
+                    "path": "<Mouse>/position",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

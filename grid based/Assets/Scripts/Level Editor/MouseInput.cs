@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class MouseInput : MonoBehaviour
 {
-    
     private MouseClick controls;
-    private Camera mainCamera;
+    [SerializeField] private Camera mainCamera;
     [SerializeField] private Transform tile;
 
     private void Awake() {
@@ -22,17 +21,19 @@ public class MouseInput : MonoBehaviour
         controls.Disable();
     }
 
-    void Start(){
+    void Start() {
         controls.Mouse.Click.performed += _ => ClickOnTile();
     }
-
-    private void ClickOnTile(){
+    
+    private void ClickOnTile() {
         Vector2 mousePosition = controls.Mouse.MousePosition.ReadValue<Vector2>();
+        //Vector2 mousePosition = Input.mousePosition;
         mousePosition = mainCamera.ScreenToWorldPoint(mousePosition);
         RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
-        if(hit.transform != null){
-            Debug.Log("click");
-        }
+        if (hit.transform != null) {
+            Debug.Log(hit.transform.name);
+            hit.collider.GetComponent<EditorTile>().Clicked();
 
+        }
     }
 }
