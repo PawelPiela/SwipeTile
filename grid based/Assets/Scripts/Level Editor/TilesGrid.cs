@@ -7,7 +7,6 @@ public class TilesGrid : MonoBehaviour
     [SerializeField] private GameObject EditorTilePrefab;
     [SerializeField] private Transform TilesParent;
     [SerializeField] private CameraSize cameraSize;
-    //[SerializeField] private List <Vector2Int> GridSizes = new List<Vector2Int>();
     [SerializeField] private List<GameObject> tiles = new List<GameObject>();
 
     

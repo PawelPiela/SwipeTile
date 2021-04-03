@@ -691,6 +691,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f25e783cd22cb9f42bbbb6f8e6d39de5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tilesGrid: {fileID: 0}
+  slider: {fileID: 0}
+  cameraSize: {fileID: 0}
 --- !u!1 &656748286
 GameObject:
   m_ObjectHideFlags: 0
@@ -703,7 +706,6 @@ GameObject:
   - component: {fileID: 656748291}
   - component: {fileID: 656748290}
   - component: {fileID: 656748289}
-  - component: {fileID: 656748292}
   m_Layer: 5
   m_Name: Save level button
   m_TagString: Untagged
@@ -813,18 +815,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 656748286}
   m_CullTransparentMesh: 1
---- !u!114 &656748292
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 656748286}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc646628eb3858f40ae1cca6a3dc9f17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &837830583
 GameObject:
   m_ObjectHideFlags: 0
@@ -906,6 +896,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 837830583}
   m_CullTransparentMesh: 1
+--- !u!1 &948887295
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 948887296}
+  - component: {fileID: 948887297}
+  m_Layer: 0
+  m_Name: UI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &948887296
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 948887295}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1688576364}
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &948887297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 948887295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 942a280ba0dd6ea4fb6c70c6cc54c0cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tilesGrid: {fileID: 171623040}
+  slider: {fileID: 1550982454}
+  cameraSize: {fileID: 552980016}
 --- !u!1 &1066083286
 GameObject:
   m_ObjectHideFlags: 0
@@ -1227,7 +1264,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 584369239f6183042853255247b5a2e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tilesGrid: {fileID: 171623040}
 --- !u!114 &1539914954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1375,9 +1411,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 808530107c85d8f4499f756bd7f155a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slider: {fileID: 1550982454}
-  cameraSize: {fileID: 552980016}
-  tilesGrid: {fileID: 171623040}
 --- !u!114 &1550982454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1658,8 +1691,8 @@ RectTransform:
   - {fileID: 1616931169}
   - {fileID: 656748287}
   - {fileID: 1550982452}
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_Father: {fileID: 948887296}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1872,7 +1905,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2122747846
 GameObject:

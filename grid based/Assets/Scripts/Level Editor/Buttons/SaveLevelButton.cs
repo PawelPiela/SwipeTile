@@ -2,10 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SaveLevelButton : Buttons
+public class SaveLevelButton : MonoBehaviour
 {
-    public override void ClickButton() {
-        base.ClickButton();
+    private Buttons buttons;
+
+    private void Start() {
+        buttons = Buttons.Instance;
+    }
+    public  void ClickButton() {
+        
         
     }
 }

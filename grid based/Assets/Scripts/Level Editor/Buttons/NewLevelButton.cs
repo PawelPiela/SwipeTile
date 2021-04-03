@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewLevelButton : Buttons
+public class NewLevelButton : MonoBehaviour
 {
-    [SerializeField] private TilesGrid tilesGrid;
+    private Buttons buttons;
 
+    private void Start() {
+        buttons = Buttons.Instance;
+    }
     public void ClickButton() {
-        tilesGrid.OnGenerateGrid();
+        buttons.tilesGrid.OnGenerateGrid();
     }
 
 }

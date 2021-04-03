@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SizeSlider : Buttons
+public class SizeSlider : MonoBehaviour
 {
-    [SerializeField] private Slider slider;
-    [SerializeField] private CameraSize cameraSize;
-    [SerializeField] private TilesGrid tilesGrid;
+    private Buttons buttons;
+
+    private void Start() {
+        buttons = Buttons.Instance;
+    }
     public void OnValueChange() {
-        if (slider.value % 2 != 0) slider.value += 1;
-        cameraSize.SetCameraSize((int)slider.value);
-        tilesGrid.OnGenerateGrid();
+        if (buttons.slider.value % 2 != 0) buttons.slider.value += 1;
+        buttons.cameraSize.SetCameraSize((int)buttons.slider.value);
+        buttons.tilesGrid.OnGenerateGrid();
     }
 }

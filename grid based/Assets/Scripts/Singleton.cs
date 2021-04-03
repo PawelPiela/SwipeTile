@@ -13,17 +13,16 @@ public class Singleton<T> : MonoBehaviour where T : Component
             //     instance = obj.AddComponent<T>();
             // }
             return instance;
-        }      
+        }
     }
 
     public virtual void Awake() {
-        if(instance == null){
-            instance = this as T;   
+        if (instance == null) {
+            instance = this as T;
             DontDestroyOnLoad(gameObject);
-            }
-        else{
+        }
+        else {
             Destroy(this);
-        }   
+        }
     }
-    
 }
