@@ -6,19 +6,18 @@ using UnityEngine;
 public class CameraSize : MonoBehaviour
 {
     private Camera mainCamera;
-
-    private int size;
-    public int Size {
-        get { return size; }
-        set { size = Mathf.Clamp(value, minCameraSize, maxCameraSize); }
-    }
-   [SerializeField] private int minCameraSize;
-   [SerializeField] private int maxCameraSize;
-   private void Awake() {
+    private int defaultSize = 6;
+    private void Awake() {
         mainCamera = Camera.main;
-    }
+        mainCamera.orthographicSize = defaultSize;
+   }
    
-    public void SetCameraSize() {
-        
+    public void SetCameraSize(int size) {
+        mainCamera.orthographicSize = size;
     }
+
+    public int GetCameraSize() {
+        return (int)mainCamera.orthographicSize;
+    }
+    
 }
