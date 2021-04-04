@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SetPlayerPositionButton : Buttons
+public class SetPlayerPositionButton : MonoBehaviour
 {
-    public override void ClickButton() {
-        base.ClickButton();
+    public void ClickButton() {
+        
         
     }
 }

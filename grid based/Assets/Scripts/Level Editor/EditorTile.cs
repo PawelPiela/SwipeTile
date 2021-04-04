@@ -14,10 +14,7 @@ public class EditorTile : MonoBehaviour
     private bool addedToList = false;
     public bool AddedToList {
         get { return addedToList; }
-        
     }
-    
-    
     
     private void Awake() {
         
@@ -30,15 +27,12 @@ public class EditorTile : MonoBehaviour
             addedToList = true;
             editorTilesManager.EditorTiles.Add(this.transform);
             spriteRenderer.color = clickedColor;
-            Debug.Log(editorTilesManager.EditorTiles.Count);
         }
 
         else if (addedToList) {
             addedToList = false;
             editorTilesManager.EditorTiles.Remove(this.transform);
             spriteRenderer.color = defaultColor;
-            Debug.Log(editorTilesManager.EditorTiles.Count);
         }
     }
-
 }

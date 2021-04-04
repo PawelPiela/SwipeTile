@@ -29,7 +29,6 @@ public class MouseInput : MonoBehaviour
         mousePosition = mainCamera.ScreenToWorldPoint(mousePosition);
         RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
         if (hit.transform != null) {
-            Debug.Log(hit.transform.name);
             hit.collider.GetComponent<EditorTile>().OnClick();
 
         }
