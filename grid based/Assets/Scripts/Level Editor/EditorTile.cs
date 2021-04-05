@@ -20,18 +20,20 @@ public class EditorTile : MonoBehaviour
         
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         spriteRenderer.color = defaultColor;
-        editorTilesManager.EditorTiles.Clear();
+        editorTilesManager.SelectedTiles.Clear();
     }
     public void OnClick() {
+        
         if (!addedToList) {
             addedToList = true;
-            editorTilesManager.EditorTiles.Add(this.transform);
+            editorTilesManager.SelectedTiles.Add(this.transform);
             spriteRenderer.color = clickedColor;
+            Debug.Log(editorTilesManager.SelectedTiles.Count);
         }
 
         else if (addedToList) {
             addedToList = false;
-            editorTilesManager.EditorTiles.Remove(this.transform);
+            editorTilesManager.SelectedTiles.Remove(this.transform);
             spriteRenderer.color = defaultColor;
         }
     }

@@ -7,6 +7,6 @@ public class Buttons : Singleton<Buttons>
     public TilesGrid tilesGrid;
     public Slider slider; 
     public CameraSize cameraSize;
-    
-    
+    public SaveLevel SaveLevel;
+
 }

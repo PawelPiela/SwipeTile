@@ -7,7 +7,8 @@ public class TilesGrid : MonoBehaviour
     [SerializeField] private GameObject EditorTilePrefab;
     [SerializeField] private Transform TilesParent;
     [SerializeField] private CameraSize cameraSize;
-    [SerializeField] private List<GameObject> tiles = new List<GameObject>();
+    public List<GameObject> tiles = new List<GameObject>();
+    [SerializeField] private EditorTilesManager editorTilesManager;
 
     
      private Vector2Int GetGridSize() {
@@ -35,6 +36,7 @@ public class TilesGrid : MonoBehaviour
         }
         GetGridSize();
         PopulateGrid();
+        editorTilesManager.SelectedTiles.Clear();
     }
     
 }

@@ -43,26 +43,23 @@ public class SwipeDetection : MonoBehaviour {
         (endTime - startTime) <= maxSwipeTime) {
             Vector3 direction = endPosition - startPosition;
             Vector2 direction2D = new Vector2(direction.x, direction.y).normalized;
+            Debug.Log("Startpos: " + startPosition);
+            Debug.Log("Endpos: " + endPosition);
             SwipeDirection(direction2D);
 
         }
     }
     private void SwipeDirection(Vector2 direction) {
-
-        if (Vector2.Dot(Vector2.up, direction) > directionTreshhold) {
-            Debug.Log("Swipe up");
-            swipedDirection = Vector2.up;
-        }
         if (Vector2.Dot(Vector2.down, direction) > directionTreshhold) {
-            Debug.Log("Swipe down");
             swipedDirection = Vector2.down;
         }
-        if (Vector2.Dot(Vector2.left, direction) > directionTreshhold) {
-            Debug.Log("Swipe left");
+        else if (Vector2.Dot(Vector2.up, direction) > directionTreshhold) {
+            swipedDirection = Vector2.up;
+        }
+        else if (Vector2.Dot(Vector2.left, direction) > directionTreshhold) {
             swipedDirection = Vector2.left;
         }
-        if (Vector2.Dot(Vector2.right, direction) > directionTreshhold) {
-            Debug.Log("Swipe right");
+        else if (Vector2.Dot(Vector2.right, direction) > directionTreshhold) {
             swipedDirection = Vector2.right;
         }
     }

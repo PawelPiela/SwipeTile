@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CameraSize : MonoBehaviour
 {
-    private Camera mainCamera;
+    [SerializeField] private Camera mainCamera;
     private int defaultSize = 6;
     private void Awake() {
         mainCamera = Camera.main;

@@ -10,7 +10,6 @@ public class SaveLevelButton : MonoBehaviour
         buttons = Buttons.Instance;
     }
     public  void ClickButton() {
-        
-        
+        buttons.SaveLevel.OnButtonClick();
     }
 }
