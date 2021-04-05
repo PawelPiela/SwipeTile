@@ -12,10 +12,12 @@ public class SaveLevel : MonoBehaviour
     private StreamWriter streamWriter;
     
     public void OnButtonClick() {
-        CreateLevelFile(GetLevelIndex());
-        WriteTilesPositionsToFile();
+        if (editorTilesManager.SelectedTiles.Count != 0 && SetPlayerPosition.SelectedPlayerPos != null) {
+            CreateLevelFile(GetLevelIndex());
+            WriteTilesPositionsToFile();
+        }
+        
     }
-
     private int GetLevelIndex() {
         DirectoryInfo directory = new DirectoryInfo(levelsDirectory);
         FileInfo[] files = directory.GetFiles("*.txt", SearchOption.TopDirectoryOnly);
@@ -31,8 +33,9 @@ public class SaveLevel : MonoBehaviour
             string position = (tile.transform.localPosition.x + "," + tile.transform.localPosition.y);
             streamWriter.WriteLine(position);
         }
-       
-        //string playerPosition = 
+        string playerPosition = SetPlayerPosition.SelectedPlayerPos.localPosition.x + "," +
+                                SetPlayerPosition.SelectedPlayerPos.localPosition.y;
+        streamWriter.WriteLine(playerPosition);
         streamWriter.Close();
     }
 }

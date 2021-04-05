@@ -8,5 +8,7 @@ public class Buttons : Singleton<Buttons>
     public Slider slider; 
     public CameraSize cameraSize;
     public SaveLevel SaveLevel;
+    public SetPlayerPosition SetPlayerPosition;
+    public Button SaveLevelButton;
 
 }

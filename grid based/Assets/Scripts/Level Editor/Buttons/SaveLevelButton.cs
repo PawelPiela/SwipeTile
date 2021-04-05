@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SaveLevelButton : MonoBehaviour
 {
@@ -8,8 +9,12 @@ public class SaveLevelButton : MonoBehaviour
 
     private void Start() {
         buttons = Buttons.Instance;
+        
     }
     public  void ClickButton() {
         buttons.SaveLevel.OnButtonClick();
+        //buttons.SaveLevelButton.c
     }
+    
+    
 }
