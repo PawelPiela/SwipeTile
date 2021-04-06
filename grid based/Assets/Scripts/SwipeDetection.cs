@@ -11,6 +11,7 @@ public class SwipeDetection : MonoBehaviour {
     private Vector2 endPosition;
     private float endTime;
     private static Vector2 swipedDirection;
+    [SerializeField] private Vector2 bugPos;
     public static Vector2 SwipedDirection {
         get { return swipedDirection; }
         set { swipedDirection = value; }
@@ -45,7 +46,11 @@ public class SwipeDetection : MonoBehaviour {
             Vector2 direction2D = new Vector2(direction.x, direction.y).normalized;
             Debug.Log("Startpos: " + startPosition);
             Debug.Log("Endpos: " + endPosition);
-            SwipeDirection(direction2D);
+            if (startPosition.y != bugPos.y) {
+                Debug.Log("swipe");
+                SwipeDirection(direction2D);
+            }
+            
 
         }
     }

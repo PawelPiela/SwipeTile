@@ -1603,6 +1603,7 @@ MonoBehaviour:
   minSwipeDistance: 0.2
   maxSwipeTime: 1
   directionTreshhold: 0.9
+  bugPos: {x: 0, y: -8}
 --- !u!114 &1235419112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2070,8 +2071,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 652089c1cdbf90147b1453d6a6259a6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tiles: []
-  tilesLeft: []
+  Tiles: []
+  TilesLeft: []
 --- !u!1001 &1577834812
 PrefabInstance:
   m_ObjectHideFlags: 0
