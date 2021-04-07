@@ -35,7 +35,7 @@ public class GameManager : Singleton<GameManager> {
     #endregion
     
     #region Methods
-    private void Awake() { }
+    public override void Awake() { base.Awake(); }
     
     private void OnLevelStart(){
         

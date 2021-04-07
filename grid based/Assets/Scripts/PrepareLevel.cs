@@ -7,7 +7,7 @@ using UnityEngine;
 public class PrepareLevel : MonoBehaviour
 {
     private GameManager gameManager;
-    
+
     private StreamReader streamReader;
     private string levelsDirectory = Application.streamingAssetsPath + "/Levels";
     
@@ -18,6 +18,9 @@ public class PrepareLevel : MonoBehaviour
 
     public void ReadLevelFromTxt(int levelIndex) {
         string levelFileName = (levelsDirectory + "/Level" + levelIndex + ".txt");
+        streamReader = new StreamReader(levelFileName);
+        
+        //int cameraSize = 
         
     }
     
