@@ -1,21 +1,33 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class PlayerTile : MonoBehaviour {
+public class PlayerTile : MonoBehaviour
+{
+    private GameManager gameManager;
     [SerializeField] private float moveSpeed;
     [SerializeField] private Transform movePoint;
-    [SerializeField] private TilesManager tilesManager;
+    private TilesManager tilesManager;
+    private SpriteRenderer spriteRenderer;
+    
     private bool isMoving = false;
     private Vector3 direction = Vector3.zero;
     private Vector3 targetPos;
     public int moveCount = 0;
 
+    private void Awake() {
+        gameManager = GameManager.Instance;
+        tilesManager = gameManager.gameObject.GetComponent<TilesManager>();
+        spriteRenderer = transform.GetComponent<SpriteRenderer>();
+    }
 
     private void Start() {
         movePoint.transform.position = transform.position;
         movePoint.transform.parent = null;
+        transform.localScale = new Vector3(0.6F, 0.6F, 1F);
+        SetColor();
 
     }
     private void Update() {
@@ -60,6 +72,10 @@ public class PlayerTile : MonoBehaviour {
         if (!isMoving) {
             direction = SwipeDetection.SwipedDirection;
         }
+    }
+
+    private void SetColor() {
+        spriteRenderer.color = gameManager.Colors.ColorFromList;
     }
 
 }

@@ -5,13 +5,16 @@ using UnityEngine;
 public class Tile : MonoBehaviour {
     private TilesManager tilesManager;
     private SpriteRenderer spriteRenderer;
+    private GameManager gameManager;
 
 
     private void Awake() {
-        tilesManager = gameObject.GetComponentInParent<TilesManager>();
+        gameManager = GameManager.Instance;
+        tilesManager = gameManager.TilesManager.gameObject.GetComponent<TilesManager>();
         spriteRenderer = transform.GetComponent<SpriteRenderer>();
         tilesManager.Tiles.Add(this.transform);
         tilesManager.TilesLeft.Add(this.transform);
+        transform.localScale = new Vector3(0.95F, 0.95F, 1F);
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {

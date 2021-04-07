@@ -2,25 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Colors : MonoBehaviour {
+public class Colors : MonoBehaviour
+{
+    private GameManager gameManager;
     [SerializeField] private List<Color> colors = new List<Color>();
-    [SerializeField] private Camera mainCamera;
-    [SerializeField] private SpriteRenderer playerTileRenderer;
-    private Color color;
+   
+    public Color ColorFromList;
     void Awake() {
+        gameManager = GameManager.Instance;
         SetColor();
     }
 
     private void SetColor(){
-        color = colors[Random.Range(0, colors.Count)];
+        ColorFromList = colors[Random.Range(0, colors.Count)];
         SetBackgroundColor();
-        SetPlayerTileColor();
+        //SetPlayerTileColor();
     }
     private void SetBackgroundColor(){
-        mainCamera.backgroundColor = color;
+        gameManager.MainCamera.backgroundColor = ColorFromList;
     }
-    private void SetPlayerTileColor(){
-        playerTileRenderer.color = color;
-    }
+    // private void SetPlayerTileColor(){
+    //     gameManager.PlayerTilePrefab.gameObject.GetComponent<SpriteRenderer>().color = ColorFromList;
+    // }
 
 }

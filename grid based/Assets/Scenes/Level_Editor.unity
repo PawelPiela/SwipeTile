@@ -896,6 +896,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   editorTilesManager: {fileID: 3980746846039725630, guid: 124cbefdfa69c414cb0689f4fc49d8a4, type: 3}
+  cameraSize: {fileID: 901982195}
 --- !u!114 &901982195
 MonoBehaviour:
   m_ObjectHideFlags: 0
