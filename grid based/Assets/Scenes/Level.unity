@@ -318,12 +318,10 @@ MonoBehaviour:
   inputManager: {fileID: 1235419112}
   TilesManager: {fileID: 1730550708}
   MainCamera: {fileID: 519420031}
+  Colors: {fileID: 907572040}
   PrepareLevel: {fileID: 907572041}
   PlayerTilePrefab: {fileID: 3944874218052813687, guid: bb7599bb0223ffb4c856297930fc1295, type: 3}
-  Colors: {fileID: 907572040}
   tilePrefab: {fileID: 9168627680932327417, guid: ed2e7057bc56e794b9f9f1299d967e6d, type: 3}
-  LevelPrepared: 0
-  LevelFinished: 0
 --- !u!114 &907572040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -345,7 +343,6 @@ MonoBehaviour:
   - {r: 1, g: 0.27058825, b: 0, a: 1}
   - {r: 0.87843144, g: 0, b: 0.043137256, a: 1}
   - {r: 0.69803923, g: 0.13333334, b: 0.13333334, a: 1}
-  ColorFromList: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &907572041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -358,6 +355,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ff44856332ad67438dfd0255fba0fb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PreparedTilesPositions: []
+  playerPosition: {x: 0, y: 0}
 --- !u!1 &1083648013
 GameObject:
   m_ObjectHideFlags: 0

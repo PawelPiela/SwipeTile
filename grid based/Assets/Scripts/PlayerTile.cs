@@ -27,7 +27,7 @@ public class PlayerTile : MonoBehaviour
         movePoint.transform.position = transform.position;
         movePoint.transform.parent = null;
         transform.localScale = new Vector3(0.6F, 0.6F, 1F);
-        SetColor();
+        spriteRenderer.color = gameManager.Colors.SetPlayerColor();
 
     }
     private void Update() {
@@ -64,7 +64,6 @@ public class PlayerTile : MonoBehaviour
         }
         return targetPos;
     }
-
     private void MovementInput() { 
         if (isMoving) {
             SwipeDetection.SwipedDirection = direction;
@@ -73,9 +72,4 @@ public class PlayerTile : MonoBehaviour
             direction = SwipeDetection.SwipedDirection;
         }
     }
-
-    private void SetColor() {
-        spriteRenderer.color = gameManager.Colors.ColorFromList;
-    }
-
 }

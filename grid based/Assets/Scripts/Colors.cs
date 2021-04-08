@@ -7,22 +7,22 @@ public class Colors : MonoBehaviour
     private GameManager gameManager;
     [SerializeField] private List<Color> colors = new List<Color>();
    
-    public Color ColorFromList;
+    private Color _color;
     void Awake() {
         gameManager = GameManager.Instance;
         SetColor();
     }
 
     private void SetColor(){
-        ColorFromList = colors[Random.Range(0, colors.Count)];
+        _color = colors[Random.Range(0, colors.Count)];
         SetBackgroundColor();
-        //SetPlayerTileColor();
     }
     private void SetBackgroundColor(){
-        gameManager.MainCamera.backgroundColor = ColorFromList;
+        gameManager.MainCamera.backgroundColor = _color;
     }
-    // private void SetPlayerTileColor(){
-    //     gameManager.PlayerTilePrefab.gameObject.GetComponent<SpriteRenderer>().color = ColorFromList;
-    // }
+
+    public Color SetPlayerColor() {
+        return _color;
+    }
 
 }
