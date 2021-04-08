@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
-
+[DefaultExecutionOrder(-90)]
 public class PrepareLevel : MonoBehaviour
 {
     private GameManager gameManager;
@@ -37,6 +37,7 @@ public class PrepareLevel : MonoBehaviour
             PreparedTilesPositions.Add(GetVector2Int(line));
         }
     }
+    
     
     private Vector2Int GetVector2Int(string line) {
         string[] array = line.Split(',');

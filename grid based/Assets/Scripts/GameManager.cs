@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 [DefaultExecutionOrder(-100)]
 public class GameManager : Singleton<GameManager> {
@@ -12,6 +13,7 @@ public class GameManager : Singleton<GameManager> {
     public PrepareLevel PrepareLevel;
     public GameObject PlayerTilePrefab;
     [SerializeField] private GameObject tilePrefab;
+    [SerializeField] private TextMeshProUGUI textObj;
 
     private int levelIndex = 1;
     private bool levelPrepared = false;
@@ -46,7 +48,9 @@ public class GameManager : Singleton<GameManager> {
         levelFinished = false;
         levelPrepared = false;
         MainCamera.orthographicSize = PrepareLevel.SetCameraSize();
-        SpawnTiles();
+        SetTiles();
+        textObj.text = PrepareLevel.PreparedTilesPositions.Count.ToString();
+        ScaleTilesUp();
         Invoke("SpawnPlayer", 1.25F);
 
     }
@@ -58,9 +62,18 @@ public class GameManager : Singleton<GameManager> {
     
     }
 
-    private void SpawnTiles() {
-        foreach (Vector2Int pos in PrepareLevel.PreparedTilesPositions) {
-            Instantiate(tilePrefab, new Vector2(pos.x, pos.y), Quaternion.identity, TilesManager.transform);
+    private void SetTiles() {
+        for (int i = 0; i < PrepareLevel.PreparedTilesPositions.Count; i++) {
+            Transform tile = TilesManager.PreSpawnedTiles[i];
+            tile.transform.localPosition =
+                new Vector2(PrepareLevel.PreparedTilesPositions[i].x, PrepareLevel.PreparedTilesPositions[i].y);
+            tile.gameObject.GetComponent<Tile>().AddToLists();
+        }
+    }
+
+    private void ScaleTilesUp() {
+        foreach (Transform tile in TilesManager.Tiles) {
+            tile.gameObject.GetComponent<Tile>().ScaleUP();
         }
     }
 
@@ -68,9 +81,9 @@ public class GameManager : Singleton<GameManager> {
         Vector2 playerPos = PrepareLevel.SetPlayerPosition();
         Instantiate(PlayerTilePrefab, new Vector2(playerPos.x, playerPos.y),Quaternion.identity,TilesManager.transform);
     }
-    
-    
-
-    
-
+    // private void SpawnTiles() {
+    //     foreach (Vector2Int pos in PrepareLevel.PreparedTilesPositions) {
+    //         Instantiate(tilePrefab, new Vector2(pos.x, pos.y), Quaternion.identity, TilesManager.transform);
+    //     }
+    // }
 }

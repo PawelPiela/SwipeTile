@@ -12,12 +12,12 @@ public class Tile : MonoBehaviour {
         gameManager = GameManager.Instance;
         tilesManager = gameManager.TilesManager.gameObject.GetComponent<TilesManager>();
         spriteRenderer = transform.GetComponent<SpriteRenderer>();
-        tilesManager.Tiles.Add(this.transform);
-        tilesManager.TilesLeft.Add(this.transform);
-        transform.localScale = new Vector3(0.95F, 0.95F, 1F);
+        //tilesManager.Tiles.Add(this.transform);
+        //tilesManager.TilesLeft.Add(this.transform);
+        //transform.localScale = new Vector3(0.95F, 0.95F, 1F);
     }
 
-    private void Start() {
+    public void ScaleUP() {
         float scalingTime = Random.Range(scalingTimeRange.x, scalingTimeRange.y);
         StartCoroutine(ScaleOverTime(scalingTime));
     }
@@ -32,7 +32,18 @@ public class Tile : MonoBehaviour {
     private void ChangeColor() {
         spriteRenderer.color = Color.white;
     }
+    
+
+    public void AddToLists() {
+        tilesManager.Tiles.Add(this.transform);
+        tilesManager.TilesLeft.Add(this.transform);
+    }
     private void RemoveTileFromList() {
+        tilesManager.TilesLeft.Remove(this.transform);
+    }
+
+    public void RemoveFromLists() {
+        tilesManager.Tiles.Remove(this.transform);
         tilesManager.TilesLeft.Remove(this.transform);
     }
 
