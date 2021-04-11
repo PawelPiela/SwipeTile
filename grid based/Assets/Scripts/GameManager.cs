@@ -6,18 +6,32 @@ using UnityEngine;
 [DefaultExecutionOrder(-100)]
 public class GameManager : Singleton<GameManager> {
     
+    public delegate void LevelStart();
+    public static event LevelStart StartEvent;
+
+    public delegate void LevelEnd();
+    public static event LevelEnd EndEvent;
+
+    public delegate void LevelRestart();
+    public static event LevelRestart RestartEvent;
+    
+    
     [SerializeField] InputManager inputManager;
     public TilesManager TilesManager;
     public Camera MainCamera;
     public Colors Colors;
     public PrepareLevel PrepareLevel;
-    [SerializeField] private Transform playerTile;
+    
   
 
-    private int levelIndex = 1;
+    public int levelIndex = 1;
     private bool levelPrepared = false;
     private bool levelFinished = false;
 
+    public override void Awake() {
+        base.Awake();
+        MainCamera.orthographicSize = 2;
+    }
     
     public int LevelIndex {
         get { return levelIndex; }
@@ -31,86 +45,29 @@ public class GameManager : Singleton<GameManager> {
         set { levelFinished = value; }
     }
     
-    
-    public override void Awake() { base.Awake(); }
-
-
     private void Start() {
-        Invoke("LevelStart", 1F);
-    }
-
-    private void Update() {
-        LevelEnd();
-    }
-
-    private void LevelStart() {
-        OnLevelStart();
-    }
-        
-    private void OnLevelStart() {
         levelFinished = false;
         levelPrepared = false;
         MainCamera.orthographicSize = PrepareLevel.SetCameraSize();
-        SetTiles();
-        Invoke("MovePlayerToGrid", 1.25F);
+        if(StartEvent != null) StartEvent();
+        
     }
 
-    private void LevelEnd() {
-        if (levelPrepared && TilesManager.TilesLeft.Count == 0) {
-            levelFinished = true;
-        }
-        if (levelFinished) {
-            Invoke("OnLevelEnd", 2F);
-        }
-    }
-    private void OnLevelEnd() {
-        levelFinished = true;
-        levelPrepared = false;
-        levelIndex++;
-        MovePlayerOffScreen();
-        MoveTilesOffScreen();
-
-    }
-
-    private void SetTiles() {
-        for (int i = 0; i < PrepareLevel.PreparedTilesPositions.Count; i++) {
-            Transform tile = TilesManager.PreSpawnedTiles[i];
-            tile.transform.localPosition =
-                new Vector2(PrepareLevel.PreparedTilesPositions[i].x, PrepareLevel.PreparedTilesPositions[i].y);
-            tile.gameObject.GetComponent<Tile>().AddToLists();
-        }
-        ScaleTiles();
-        levelPrepared = true;
-    }
-
-    private void ScaleTiles() {
-        Debug.Log("Scale");
-        foreach (Transform tile in TilesManager.Tiles) {
-            tile.gameObject.GetComponent<Tile>().Scale();
-        }
-    }
-
-    private void MovePlayerToGrid() {
-        playerTile.gameObject.GetComponent<PlayerTile>().MoveToGrid(new Vector2(PrepareLevel.SetPlayerPosition().x, PrepareLevel.SetPlayerPosition().y));
-    }
-
-    private void MovePlayerOffScreen() {
-        playerTile.gameObject.GetComponent<PlayerTile>().MoveOffScreen();
-    }
-
-    private void MoveTilesOffScreen() {
-        ScaleTiles();
-        foreach (Transform tile in TilesManager.Tiles) {
-            tile.gameObject.GetComponent<Tile>().MoveToOffScreenPos();
-            
-        }
+    private void Update() {
+        EndLevel();
     }
     
-    IEnumerator WaitForSeconds(float time)
-    {
-        
-        yield return new WaitForSeconds(time);
-
+    private void EndLevel() {
+        if (TilesManager.TilesLeft.Count == 0 && levelPrepared && !levelFinished) {
+            if(EndEvent != null) EndEvent();
+            levelFinished = true;
+        }
     }
+
+    public void RestartLevel() {
+        
+    }
+        
+    
     
 }

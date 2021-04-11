@@ -16,22 +16,14 @@ public class PrepareLevel : MonoBehaviour
     private void Awake() {
         gameManager = GameManager.Instance;
         BetterStreamingAssets.Initialize();
-    }
-
-    private void Start() {
         ReadLevelFromTxt(gameManager.LevelIndex);
     }
 
-    private void ReadLevelFromTxt(int levelIndex) {
-        // string levelFileName = (levelsDirectory + "/Level" + levelIndex + ".txt");
-        // using (StreamReader streamReader = new StreamReader(levelFileName)) {
-        //     string line;
-        //     while ((line = streamReader.ReadLine()) != null) {
-        //         stringList.Add(line);
-        //     }
-        // }
+    private void Start() {
         
-        ///BETTER STREAMING ASSETS////
+    }
+
+    private void ReadLevelFromTxt(int levelIndex) {
         string levelFileName = ("/levels"+"/level" + levelIndex + ".txt");
         using (var stream = BetterStreamingAssets.OpenText(levelFileName)) {
             string line;

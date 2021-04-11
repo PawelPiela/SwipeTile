@@ -23,11 +23,41 @@ public class PlayerTile : MonoBehaviour
         gameManager = GameManager.Instance;
         spriteRenderer = transform.GetComponent<SpriteRenderer>();
     }
+    
+    private void OnEnable() {
+        GameManager.StartEvent += StartLevel;
+        GameManager.EndEvent += EndLevel;
+        GameManager.RestartEvent += EndLevel;
+    }
+
+    private void OnDisable() {
+        GameManager.StartEvent -= StartLevel;
+        GameManager.EndEvent -= EndLevel;
+        GameManager.RestartEvent -= EndLevel;
+    }
+
+    private IEnumerator StartLevelCoroutine() {
+        yield return new WaitForSeconds(1);
+        MoveToGrid();
+        
+    }
+    private void StartLevel() {
+        StartCoroutine(StartLevelCoroutine());
+    }
+
+    private IEnumerator EndLevelCoroutine() {
+        yield return new WaitForSeconds(3);
+        MoveOffScreen();
+    }
+    private void EndLevel() {
+        
+        StartCoroutine(EndLevelCoroutine());
+        
+    }
+    
 
     private void Start() {
         transform.localScale = new Vector3(0.6F, 0.6F, 1F);
-        spriteRenderer.color = gameManager.Colors.SetPlayerColor();
-
     }
     private void Update() {
         MenageMovement();
@@ -72,23 +102,18 @@ public class PlayerTile : MonoBehaviour
         }
     }
 
-    public void MoveToGrid(Vector2 position) {
-        transform.localPosition = new Vector2(position.x, position.y);
+    private void MoveToGrid() {
+        transform.localPosition = new Vector2(gameManager.PrepareLevel.SetPlayerPosition().x, gameManager.PrepareLevel.SetPlayerPosition().y);
         RemoveParentFromMovePoint();
     }
 
-    public void MoveOffScreen() {
-        SetParentToMovePoint();
+    private void MoveOffScreen() {
         movePoint.transform.localPosition = Vector2.zero;
         transform.position = new Vector2(offScreen.x, offScreen.y);
     }
-
-    public void RemoveParentFromMovePoint() {
+    private void RemoveParentFromMovePoint() {
         movePoint.transform.position = transform.position;
         movePoint.transform.parent = null;
     }
-    public void SetParentToMovePoint() {
-        movePoint.transform.position = transform.position;
-        movePoint.transform.parent = this.transform;
-    }
+    
 }

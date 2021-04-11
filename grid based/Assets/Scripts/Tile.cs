@@ -14,7 +14,6 @@ public class Tile : MonoBehaviour {
         gameManager = GameManager.Instance;
         tilesManager = gameManager.TilesManager.gameObject.GetComponent<TilesManager>();
         spriteRenderer = transform.GetComponent<SpriteRenderer>();
-        MoveToOffScreenPos();
         isScaledUp = false;
     }
 
@@ -29,6 +28,8 @@ public class Tile : MonoBehaviour {
             StartCoroutine(ScaleOverTime(scalingTime, finalScale, startScale));
             isScaledUp = false;
         }
+
+        
     }
     
     private void OnTriggerEnter2D(Collider2D collision) {
@@ -58,7 +59,6 @@ public class Tile : MonoBehaviour {
 
     IEnumerator ScaleOverTime(float time, Vector3 startScale, Vector3 finalScale)
     {
-        
         float currentTime = 0.0f;
         do
         {
@@ -66,10 +66,6 @@ public class Tile : MonoBehaviour {
             currentTime += Time.deltaTime;
             yield return null;
         } while (currentTime <= time);
-    }
-
-    public void MoveToOffScreenPos() {
-        transform.position = new Vector2(offScreenPos.x, offScreenPos.y);
     }
     
 }

@@ -2443,9 +2443,7 @@ MonoBehaviour:
   MainCamera: {fileID: 519420031}
   Colors: {fileID: 907572040}
   PrepareLevel: {fileID: 907572041}
-  playerTile: {fileID: 492421615}
-  tilePrefab: {fileID: 9168627680932327417, guid: ed2e7057bc56e794b9f9f1299d967e6d, type: 3}
-  textObj: {fileID: 1661115924}
+  levelIndex: 1
 --- !u!114 &907572040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2458,6 +2456,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd664ef5548af1d4cbe9fff63d16af05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTile: {fileID: 492421615}
   colors:
   - {r: 0.6862745, g: 0.121568635, b: 0.5647059, a: 1}
   - {r: 0, g: 0.03137255, b: 0.27450982, a: 1}
