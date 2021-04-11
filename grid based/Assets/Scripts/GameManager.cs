@@ -11,7 +11,7 @@ public class GameManager : Singleton<GameManager> {
     public Camera MainCamera;
     public Colors Colors;
     public PrepareLevel PrepareLevel;
-    public GameObject PlayerTilePrefab;
+    [SerializeField] private Transform playerTile;
     [SerializeField] private GameObject tilePrefab;
     [SerializeField] private TextMeshProUGUI textObj;
 
@@ -49,10 +49,8 @@ public class GameManager : Singleton<GameManager> {
         levelPrepared = false;
         MainCamera.orthographicSize = PrepareLevel.SetCameraSize();
         SetTiles();
-        textObj.text = PrepareLevel.PreparedTilesPositions.Count.ToString();
         ScaleTilesUp();
-        Invoke("SpawnPlayer", 1.25F);
-
+        Invoke("MovePlayerToGrid", 1.25F);
     }
 
     private void LevelEnd() {
@@ -77,13 +75,8 @@ public class GameManager : Singleton<GameManager> {
         }
     }
 
-    private void SpawnPlayer() {
-        Vector2 playerPos = PrepareLevel.SetPlayerPosition();
-        Instantiate(PlayerTilePrefab, new Vector2(playerPos.x, playerPos.y),Quaternion.identity,TilesManager.transform);
+    private void MovePlayerToGrid() {
+        playerTile.transform.GetComponent<PlayerTile>().MoveToGrid(new Vector2(PrepareLevel.SetPlayerPosition().x, PrepareLevel.SetPlayerPosition().y));
     }
-    // private void SpawnTiles() {
-    //     foreach (Vector2Int pos in PrepareLevel.PreparedTilesPositions) {
-    //         Instantiate(tilePrefab, new Vector2(pos.x, pos.y), Quaternion.identity, TilesManager.transform);
-    //     }
-    // }
+   
 }

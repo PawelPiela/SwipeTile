@@ -7,21 +7,27 @@ public class Tile : MonoBehaviour {
     private GameManager gameManager;
     [SerializeField] private Vector3 finalScale;
     [SerializeField] private Vector2 scalingTimeRange;
+    private Vector2Int offScreenPos = new Vector2Int(-100, 0);
 
     private void Awake() {
         gameManager = GameManager.Instance;
         tilesManager = gameManager.TilesManager.gameObject.GetComponent<TilesManager>();
         spriteRenderer = transform.GetComponent<SpriteRenderer>();
-        //tilesManager.Tiles.Add(this.transform);
-        //tilesManager.TilesLeft.Add(this.transform);
-        //transform.localScale = new Vector3(0.95F, 0.95F, 1F);
+        MoveToOffScreenPos();
     }
 
     public void ScaleUP() {
         float scalingTime = Random.Range(scalingTimeRange.x, scalingTimeRange.y);
-        StartCoroutine(ScaleOverTime(scalingTime));
+        Vector3 startScale = Vector3.zero;
+        StartCoroutine(ScaleOverTime(scalingTime, startScale, finalScale));
     }
 
+    public void ScaleDown() {
+        float scalingTime = Random.Range(scalingTimeRange.x, scalingTimeRange.y);
+        Vector3 startScale = Vector3.zero;
+        StartCoroutine(ScaleOverTime(scalingTime, finalScale, startScale));
+    }
+    
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.tag == "Player" && spriteRenderer.color != Color.white) {
             RemoveTileFromList();
@@ -47,9 +53,9 @@ public class Tile : MonoBehaviour {
         tilesManager.TilesLeft.Remove(this.transform);
     }
 
-    IEnumerator ScaleOverTime(float time)
+    IEnumerator ScaleOverTime(float time, Vector3 startScale, Vector3 finalScale)
     {
-        Vector3 startScale = Vector3.zero;
+        
         float currentTime = 0.0f;
         do
         {
@@ -57,6 +63,10 @@ public class Tile : MonoBehaviour {
             currentTime += Time.deltaTime;
             yield return null;
         } while (currentTime <= time);
+    }
+
+    public void MoveToOffScreenPos() {
+        transform.position = new Vector2(offScreenPos.x, offScreenPos.y);
     }
     
 }

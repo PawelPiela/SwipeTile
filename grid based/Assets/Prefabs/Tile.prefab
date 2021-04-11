@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   finalScale: {x: 0.95, y: 0.95, z: 1}
   scalingTimeRange: {x: 0.25, y: 1}
-  isReady: 0
+  offScreenPos: {x: -100, y: 0}
 --- !u!212 &9168627680932327419
 SpriteRenderer:
   m_ObjectHideFlags: 0

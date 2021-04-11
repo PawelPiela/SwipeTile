@@ -15,5 +15,4 @@ public class SetPlayerPosition : MonoBehaviour
             SelectedPlayerPos = null;
         }
     }
-    
 }

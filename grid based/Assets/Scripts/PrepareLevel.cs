@@ -8,15 +8,14 @@ using UnityEngine;
 public class PrepareLevel : MonoBehaviour
 {
     private GameManager gameManager;
-    
     public List<Vector2Int> PreparedTilesPositions = new List<Vector2Int>();
     private List<string> stringList = new List<string>();
-    private string levelsDirectory = Application.streamingAssetsPath + "/Levels";
     private int cameraSize;
     public Vector2Int playerPosition;
     
     private void Awake() {
         gameManager = GameManager.Instance;
+        BetterStreamingAssets.Initialize();
     }
 
     private void Start() {
@@ -24,10 +23,19 @@ public class PrepareLevel : MonoBehaviour
     }
 
     private void ReadLevelFromTxt(int levelIndex) {
-        string levelFileName = (levelsDirectory + "/Level" + levelIndex + ".txt");
-        using (StreamReader streamReader = new StreamReader(levelFileName)) {
+        // string levelFileName = (levelsDirectory + "/Level" + levelIndex + ".txt");
+        // using (StreamReader streamReader = new StreamReader(levelFileName)) {
+        //     string line;
+        //     while ((line = streamReader.ReadLine()) != null) {
+        //         stringList.Add(line);
+        //     }
+        // }
+        
+        ///BETTER STREAMING ASSETS////
+        string levelFileName = ("/levels"+"/level" + levelIndex + ".txt");
+        using (var stream = BetterStreamingAssets.OpenText(levelFileName)) {
             string line;
-            while ((line = streamReader.ReadLine()) != null) {
+            while ((line = stream.ReadLine()) != null) {
                 stringList.Add(line);
             }
         }

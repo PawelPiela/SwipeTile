@@ -8,7 +8,7 @@ public class SaveLevel : MonoBehaviour
 {
     [SerializeField] private EditorTilesManager editorTilesManager;
     [SerializeField] private CameraSize cameraSize;
-    private string levelsDirectory = Application.streamingAssetsPath + "/Levels";
+    private string levelsDirectory = Application.streamingAssetsPath + "/levels";
     private FileStream fileStream;
     private StreamWriter streamWriter;
 
@@ -26,7 +26,7 @@ public class SaveLevel : MonoBehaviour
     }
 
     private void CreateLevelFile(int levelIndex) {
-        fileStream = File.Create(levelsDirectory + "/Level" + levelIndex + ".txt");
+        fileStream = File.Create(levelsDirectory + "/level" + levelIndex + ".txt");
     }
 
     private void WriteTilesPositionsToFile() {

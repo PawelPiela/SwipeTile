@@ -9,23 +9,22 @@ public class PlayerTile : MonoBehaviour
     private GameManager gameManager;
     [SerializeField] private float moveSpeed;
     [SerializeField] private Transform movePoint;
-    private TilesManager tilesManager;
+    [SerializeField] private TilesManager tilesManager;
     private SpriteRenderer spriteRenderer;
     
     private bool isMoving = false;
     private Vector3 direction = Vector3.zero;
     private Vector3 targetPos;
+    [SerializeField] private Vector2 offScreen; 
     public int moveCount = 0;
 
     private void Awake() {
+        transform.position = new Vector2(offScreen.x, offScreen.y);
         gameManager = GameManager.Instance;
-        tilesManager = gameManager.gameObject.GetComponent<TilesManager>();
         spriteRenderer = transform.GetComponent<SpriteRenderer>();
     }
 
     private void Start() {
-        movePoint.transform.position = transform.position;
-        movePoint.transform.parent = null;
         transform.localScale = new Vector3(0.6F, 0.6F, 1F);
         spriteRenderer.color = gameManager.Colors.SetPlayerColor();
 
@@ -71,5 +70,23 @@ public class PlayerTile : MonoBehaviour
         if (!isMoving) {
             direction = SwipeDetection.SwipedDirection;
         }
+    }
+
+    public void MoveToGrid(Vector2 position) {
+        transform.localPosition = new Vector2(position.x, position.y);
+        transform.GetComponent<PlayerTile>().RemoveParentFromMovePoint();
+    }
+
+    public void MoveOffScreen() {
+        
+    }
+
+    public void RemoveParentFromMovePoint() {
+        movePoint.transform.position = transform.position;
+        movePoint.transform.parent = null;
+    }
+    public void SetParentToMovePoint() {
+        movePoint.transform.position = transform.position;
+        movePoint.transform.parent = this.transform;
     }
 }

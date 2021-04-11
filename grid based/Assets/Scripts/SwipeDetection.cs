@@ -26,8 +26,7 @@ public class SwipeDetection : MonoBehaviour {
         inputManager.OnStartTouch -= SwipeStart;
         inputManager.OnEndTouch -= SwipeEnd;
     }
-
-
+    
     private void SwipeStart(Vector2 position, float time) {
         startPosition = position;
         startTime = time;
