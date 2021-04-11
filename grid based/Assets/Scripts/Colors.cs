@@ -25,8 +25,8 @@ public class Colors : MonoBehaviour
 
     private void SetColor(){
         _color = colors[Random.Range(0, colors.Count)];
-        SetBackgroundColor();
-        SetPlayerColor();
+        //SetBackgroundColor();
+        //SetPlayerColor();
     }
     private void SetBackgroundColor(){
         gameManager.MainCamera.backgroundColor = _color;

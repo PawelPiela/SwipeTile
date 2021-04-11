@@ -46,7 +46,7 @@ public class PlayerTile : MonoBehaviour
     }
 
     private IEnumerator EndLevelCoroutine() {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2);
         MoveOffScreen();
     }
     private void EndLevel() {

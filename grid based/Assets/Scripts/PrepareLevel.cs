@@ -8,15 +8,18 @@ using UnityEngine;
 public class PrepareLevel : MonoBehaviour
 {
     private GameManager gameManager;
+    private Level level;
     public List<Vector2Int> PreparedTilesPositions = new List<Vector2Int>();
     private List<string> stringList = new List<string>();
     private int cameraSize;
     public Vector2Int playerPosition;
     
     private void Awake() {
+        level = Level.Instance;
         gameManager = GameManager.Instance;
         BetterStreamingAssets.Initialize();
-        ReadLevelFromTxt(gameManager.LevelIndex);
+        //ReadLevelFromTxt(level.LevelIndex);
+        ReadLevelFromTxt(1);
     }
 
     private void Start() {
