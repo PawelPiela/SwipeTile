@@ -8,24 +8,27 @@ public class Tile : MonoBehaviour {
     [SerializeField] private Vector3 finalScale;
     [SerializeField] private Vector2 scalingTimeRange;
     private Vector2Int offScreenPos = new Vector2Int(-100, 0);
+    private bool isScaledUp;
 
     private void Awake() {
         gameManager = GameManager.Instance;
         tilesManager = gameManager.TilesManager.gameObject.GetComponent<TilesManager>();
         spriteRenderer = transform.GetComponent<SpriteRenderer>();
         MoveToOffScreenPos();
+        isScaledUp = false;
     }
 
-    public void ScaleUP() {
+    public void Scale() {
         float scalingTime = Random.Range(scalingTimeRange.x, scalingTimeRange.y);
         Vector3 startScale = Vector3.zero;
-        StartCoroutine(ScaleOverTime(scalingTime, startScale, finalScale));
-    }
-
-    public void ScaleDown() {
-        float scalingTime = Random.Range(scalingTimeRange.x, scalingTimeRange.y);
-        Vector3 startScale = Vector3.zero;
-        StartCoroutine(ScaleOverTime(scalingTime, finalScale, startScale));
+        if (!isScaledUp) {
+            StartCoroutine(ScaleOverTime(scalingTime, startScale, finalScale));
+            isScaledUp = true;
+        }
+        else if (isScaledUp) {
+            StartCoroutine(ScaleOverTime(scalingTime, finalScale, startScale));
+            isScaledUp = false;
+        }
     }
     
     private void OnTriggerEnter2D(Collider2D collision) {

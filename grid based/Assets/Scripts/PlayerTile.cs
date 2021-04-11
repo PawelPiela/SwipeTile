@@ -74,11 +74,13 @@ public class PlayerTile : MonoBehaviour
 
     public void MoveToGrid(Vector2 position) {
         transform.localPosition = new Vector2(position.x, position.y);
-        transform.GetComponent<PlayerTile>().RemoveParentFromMovePoint();
+        RemoveParentFromMovePoint();
     }
 
     public void MoveOffScreen() {
-        
+        SetParentToMovePoint();
+        movePoint.transform.localPosition = Vector2.zero;
+        transform.position = new Vector2(offScreen.x, offScreen.y);
     }
 
     public void RemoveParentFromMovePoint() {

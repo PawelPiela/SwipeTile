@@ -12,8 +12,7 @@ public class GameManager : Singleton<GameManager> {
     public Colors Colors;
     public PrepareLevel PrepareLevel;
     [SerializeField] private Transform playerTile;
-    [SerializeField] private GameObject tilePrefab;
-    [SerializeField] private TextMeshProUGUI textObj;
+  
 
     private int levelIndex = 1;
     private bool levelPrepared = false;
@@ -40,6 +39,10 @@ public class GameManager : Singleton<GameManager> {
         Invoke("LevelStart", 1F);
     }
 
+    private void Update() {
+        LevelEnd();
+    }
+
     private void LevelStart() {
         OnLevelStart();
     }
@@ -49,15 +52,24 @@ public class GameManager : Singleton<GameManager> {
         levelPrepared = false;
         MainCamera.orthographicSize = PrepareLevel.SetCameraSize();
         SetTiles();
-        ScaleTilesUp();
         Invoke("MovePlayerToGrid", 1.25F);
     }
 
     private void LevelEnd() {
-        
+        if (levelPrepared && TilesManager.TilesLeft.Count == 0) {
+            levelFinished = true;
+        }
+        if (levelFinished) {
+            Invoke("OnLevelEnd", 2F);
+        }
     }
-    private void OnLevelEnd(){
-    
+    private void OnLevelEnd() {
+        levelFinished = true;
+        levelPrepared = false;
+        levelIndex++;
+        MovePlayerOffScreen();
+        MoveTilesOffScreen();
+
     }
 
     private void SetTiles() {
@@ -67,16 +79,38 @@ public class GameManager : Singleton<GameManager> {
                 new Vector2(PrepareLevel.PreparedTilesPositions[i].x, PrepareLevel.PreparedTilesPositions[i].y);
             tile.gameObject.GetComponent<Tile>().AddToLists();
         }
+        ScaleTiles();
+        levelPrepared = true;
     }
 
-    private void ScaleTilesUp() {
+    private void ScaleTiles() {
+        Debug.Log("Scale");
         foreach (Transform tile in TilesManager.Tiles) {
-            tile.gameObject.GetComponent<Tile>().ScaleUP();
+            tile.gameObject.GetComponent<Tile>().Scale();
         }
     }
 
     private void MovePlayerToGrid() {
-        playerTile.transform.GetComponent<PlayerTile>().MoveToGrid(new Vector2(PrepareLevel.SetPlayerPosition().x, PrepareLevel.SetPlayerPosition().y));
+        playerTile.gameObject.GetComponent<PlayerTile>().MoveToGrid(new Vector2(PrepareLevel.SetPlayerPosition().x, PrepareLevel.SetPlayerPosition().y));
     }
-   
+
+    private void MovePlayerOffScreen() {
+        playerTile.gameObject.GetComponent<PlayerTile>().MoveOffScreen();
+    }
+
+    private void MoveTilesOffScreen() {
+        ScaleTiles();
+        foreach (Transform tile in TilesManager.Tiles) {
+            tile.gameObject.GetComponent<Tile>().MoveToOffScreenPos();
+            
+        }
+    }
+    
+    IEnumerator WaitForSeconds(float time)
+    {
+        
+        yield return new WaitForSeconds(time);
+
+    }
+    
 }
