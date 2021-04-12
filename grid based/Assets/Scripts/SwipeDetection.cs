@@ -43,14 +43,9 @@ public class SwipeDetection : MonoBehaviour {
         (endTime - startTime) <= maxSwipeTime) {
             Vector3 direction = endPosition - startPosition;
             Vector2 direction2D = new Vector2(direction.x, direction.y).normalized;
-            Debug.Log("Startpos: " + startPosition);
-            Debug.Log("Endpos: " + endPosition);
             if (startPosition.y != bugPos.y) {
-                Debug.Log("swipe");
                 SwipeDirection(direction2D);
             }
-            
-
         }
     }
     private void SwipeDirection(Vector2 direction) {
@@ -67,7 +62,4 @@ public class SwipeDetection : MonoBehaviour {
             swipedDirection = Vector2.right;
         }
     }
-
-
-
 }

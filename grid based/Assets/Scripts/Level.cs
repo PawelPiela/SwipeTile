@@ -1,19 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[DefaultExecutionOrder(-200)]
-public class Level : Singleton<Level>
+[DefaultExecutionOrder(-150)]
+public class Level : SingletonPersistant<Level>
 {
-    private static int levelIndex = 1;
+    private static int levelIndex;
     public static int LevelIndex {
         get {
             return levelIndex;
         }
         set {
-            if (value <= 0) levelIndex = value;
+            levelIndex = value;
         }
     }
-    public override void Awake() {
+    public void Awake() {
         base.Awake();
+        levelIndex = 1;
     }
 }

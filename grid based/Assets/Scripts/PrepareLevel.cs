@@ -4,29 +4,24 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
-[DefaultExecutionOrder(-90)]
-public class PrepareLevel : MonoBehaviour
+public class PrepareLevel : SingletonPersistant<PrepareLevel>
 {
-    private GameManager gameManager;
-    private Level level;
     public List<Vector2Int> PreparedTilesPositions = new List<Vector2Int>();
     private List<string> stringList = new List<string>();
     private int cameraSize;
     public Vector2Int playerPosition;
     
     private void Awake() {
-        level = Level.Instance;
-        gameManager = GameManager.Instance;
+        base.Awake();
         BetterStreamingAssets.Initialize();
-        //ReadLevelFromTxt(level.LevelIndex);
-        ReadLevelFromTxt(1);
+        //ReadLevelFromTxt(Level.LevelIndex);
     }
 
     private void Start() {
         
     }
 
-    private void ReadLevelFromTxt(int levelIndex) {
+    public void ReadLevelFromTxt(int levelIndex) {
         string levelFileName = ("/levels"+"/level" + levelIndex + ".txt");
         using (var stream = BetterStreamingAssets.OpenText(levelFileName)) {
             string line;
@@ -40,8 +35,6 @@ public class PrepareLevel : MonoBehaviour
             PreparedTilesPositions.Add(GetVector2Int(line));
         }
     }
-    
-    
     private Vector2Int GetVector2Int(string line) {
         string[] array = line.Split(',');
         int x = Convert.ToInt32(array[0]);

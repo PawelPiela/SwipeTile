@@ -37,25 +37,24 @@ public class PlayerTile : MonoBehaviour
     }
 
     private IEnumerator StartLevelCoroutine() {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
         MoveToGrid();
-        
+        yield return new WaitForSeconds(5F);
+        RemoveParentFromMovePoint();
+
     }
     private void StartLevel() {
         StartCoroutine(StartLevelCoroutine());
     }
 
     private IEnumerator EndLevelCoroutine() {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
         MoveOffScreen();
     }
     private void EndLevel() {
-        
         StartCoroutine(EndLevelCoroutine());
-        
     }
     
-
     private void Start() {
         transform.localScale = new Vector3(0.6F, 0.6F, 1F);
     }
@@ -103,8 +102,9 @@ public class PlayerTile : MonoBehaviour
     }
 
     private void MoveToGrid() {
+        Debug.Log(new Vector2(gameManager.PrepareLevel.SetPlayerPosition().x, gameManager.PrepareLevel.SetPlayerPosition().y));
         transform.localPosition = new Vector2(gameManager.PrepareLevel.SetPlayerPosition().x, gameManager.PrepareLevel.SetPlayerPosition().y);
-        RemoveParentFromMovePoint();
+        //RemoveParentFromMovePoint();
     }
 
     private void MoveOffScreen() {

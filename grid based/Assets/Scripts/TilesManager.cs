@@ -37,10 +37,11 @@ public class TilesManager : MonoBehaviour
         StartCoroutine(StartLevelCoroutine());
     }
     private IEnumerator EndLevelCoroutine() {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
         ScaleTiles();
     }
     private void EndLevel() {
+        
         StartCoroutine(EndLevelCoroutine());
     }
 

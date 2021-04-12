@@ -9,7 +9,7 @@ public class GameManager : Singleton<GameManager> {
     
     // private static GameManager instance;
     // public static GameManager Instance {
-    //     get { return instance; }
+    //      get { return instance; }
     // }
     
     public delegate void LevelStart();
@@ -29,16 +29,41 @@ public class GameManager : Singleton<GameManager> {
     public PrepareLevel PrepareLevel;
     [SerializeField] private TextMeshProUGUI levelText;
     
+    private int levelIndex;
+    public int LevelIndex {
+        get {
+            return levelIndex;
+        }
+    }
     
     private bool levelPrepared = false;
     private bool levelFinished = false;
 
-    public override void Awake() {
+    public void Awake() {
         base.Awake();
         level = Level.Instance;
         MainCamera.orthographicSize = 2;
     }
     
+    // private void OnEnable() {
+    //     SceneManager.sceneLoaded += SceneLoaded;
+    // }
+    //
+    //
+    // private void OnDisable() {
+    //     SceneManager.sceneLoaded -= SceneLoaded;
+    // }
+    //
+    // private void SceneLoaded(Scene scene, LoadSceneMode mode) {
+    //     if (scene.isLoaded) {
+    //         MainCamera.orthographicSize = 2;
+    //         levelFinished = false;
+    //         levelPrepared = false;
+    //         MainCamera.orthographicSize = PrepareLevel.SetCameraSize();
+    //         if (StartEvent != null) StartEvent();
+    //         levelText.text = (LevelIndex).ToString();
+    //     }
+    // }
     
     public bool LevelPrepared {
         get { return levelPrepared; }
@@ -48,14 +73,14 @@ public class GameManager : Singleton<GameManager> {
         get { return levelFinished; }
         set { levelFinished = value; }
     }
-    
-    private void Start() {
+    //OnLevelLoadedFromFile()
+    public void Start() {
         levelFinished = false;
         levelPrepared = false;
-        MainCamera.orthographicSize = PrepareLevel.SetCameraSize();
+        levelIndex = Level.LevelIndex;
         if(StartEvent != null) StartEvent();
-        levelText.text = (level.LevelIndex).ToString();
-
+        MainCamera.orthographicSize = PrepareLevel.SetCameraSize();
+        levelText.text = (LevelIndex).ToString();
     }
 
     private void Update() {
@@ -64,23 +89,22 @@ public class GameManager : Singleton<GameManager> {
     
     private void EndLevel() {
         if (TilesManager.TilesLeft.Count == 0 && levelPrepared && !levelFinished) {
-            if(EndEvent != null) EndEvent();
+            if (EndEvent != null) {
+                EndEvent();
+            }
             levelFinished = true;
-            level.LevelIndex++;
+            Level.LevelIndex++;
             StartCoroutine(EndLevelCoroutine());
             
         }
     }
 
     private IEnumerator EndLevelCoroutine() {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2.5F);
         SceneManager.LoadScene("Level");
     }
     
     public void RestartLevel() {
         
     }
-        
-    
-    
 }
