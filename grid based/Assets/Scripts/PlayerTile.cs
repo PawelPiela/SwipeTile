@@ -59,6 +59,7 @@ public class PlayerTile : MonoBehaviour
     
     private void Start() {
         transform.localScale = new Vector3(0.6F, 0.6F, 1F);
+        spriteRenderer.color = Level.GetColor();
     }
     private void Update() {
         if(movementEnabled) MenageMovement();
@@ -121,5 +122,5 @@ public class PlayerTile : MonoBehaviour
         movePoint.transform.position = transform.position;
         movePoint.transform.parent = null;
     }
-    
+
 }
