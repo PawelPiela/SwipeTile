@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class SwipeDetection : MonoBehaviour {
@@ -15,6 +16,10 @@ public class SwipeDetection : MonoBehaviour {
     public static Vector2 SwipedDirection {
         get { return swipedDirection; }
         set { swipedDirection = value; }
+    }
+
+    private void Awake() {
+        swipedDirection = Vector2.zero;
     }
 
     private void OnEnable() {
@@ -61,5 +66,6 @@ public class SwipeDetection : MonoBehaviour {
         else if (Vector2.Dot(Vector2.right, direction) > directionTreshhold) {
             swipedDirection = Vector2.right;
         }
+        Debug.Log(swipedDirection);
     }
 }

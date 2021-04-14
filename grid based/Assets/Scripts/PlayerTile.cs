@@ -16,12 +16,14 @@ public class PlayerTile : MonoBehaviour
     private Vector3 direction = Vector3.zero;
     private Vector3 targetPos;
     [SerializeField] private Vector2 offScreen; 
-    public int moveCount = 0;
+    //public int moveCount = 0;
+    private bool movementEnabled = false;
 
     private void Awake() {
         transform.position = new Vector2(offScreen.x, offScreen.y);
         gameManager = GameManager.Instance;
         spriteRenderer = transform.GetComponent<SpriteRenderer>();
+        
     }
     
     private void OnEnable() {
@@ -37,35 +39,40 @@ public class PlayerTile : MonoBehaviour
     }
 
     private IEnumerator StartLevelCoroutine() {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1.75F);
         MoveToGrid();
-        yield return new WaitForSeconds(5F);
-        RemoveParentFromMovePoint();
+        yield return new WaitForSeconds(0.5F);
+        EnableMovement();
 
     }
-    private void StartLevel() {
-        StartCoroutine(StartLevelCoroutine());
-    }
-
+    
     private IEnumerator EndLevelCoroutine() {
         yield return new WaitForSeconds(1);
         MoveOffScreen();
     }
-    private void EndLevel() {
-        StartCoroutine(EndLevelCoroutine());
+    
+    private void StartLevel() { StartCoroutine(StartLevelCoroutine());
+    }
+    
+    private void EndLevel() { StartCoroutine(EndLevelCoroutine());
     }
     
     private void Start() {
         transform.localScale = new Vector3(0.6F, 0.6F, 1F);
     }
     private void Update() {
-        MenageMovement();
+        if(movementEnabled) MenageMovement();
+        
     }
     private void MenageMovement() {
         TileMovement();
         MovementInput();
     }
 
+    private void EnableMovement() {
+        movementEnabled = true;
+    }
+    
     private void TileMovement() {
         if (direction != Vector3.zero) {
             targetPos = SetNextWaypoint(direction);
@@ -102,9 +109,8 @@ public class PlayerTile : MonoBehaviour
     }
 
     private void MoveToGrid() {
-        Debug.Log(new Vector2(gameManager.PrepareLevel.SetPlayerPosition().x, gameManager.PrepareLevel.SetPlayerPosition().y));
-        transform.localPosition = new Vector2(gameManager.PrepareLevel.SetPlayerPosition().x, gameManager.PrepareLevel.SetPlayerPosition().y);
-        //RemoveParentFromMovePoint();
+        transform.localPosition = new Vector2(Level.GetPlayerPosition().x, Level.GetPlayerPosition().y);
+        RemoveParentFromMovePoint();
     }
 
     private void MoveOffScreen() {

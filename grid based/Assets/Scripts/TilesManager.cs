@@ -28,12 +28,13 @@ public class TilesManager : MonoBehaviour
     }
 
      private IEnumerator StartLevelCoroutine() { 
-         yield return new WaitForSeconds(1);
+         //yield return new WaitForSeconds(1);
          SetTiles();
-         yield return new WaitForSeconds(1);
+         yield return new WaitForSeconds(1.5F);
          gameManager.LevelPrepared = true;
     }
     private void StartLevel() {
+        //SetTiles();
         StartCoroutine(StartLevelCoroutine());
     }
     private IEnumerator EndLevelCoroutine() {
@@ -41,15 +42,15 @@ public class TilesManager : MonoBehaviour
         ScaleTiles();
     }
     private void EndLevel() {
-        
+        //ScaleTiles();
         StartCoroutine(EndLevelCoroutine());
     }
 
     private void SetTiles() {
-        for (int i = 0; i < gameManager.PrepareLevel.PreparedTilesPositions.Count; i++) {
+        for (int i = 0; i < Level.GetTilesPositions().Count; i++) {
             Transform tile = PreSpawnedTiles[i];
             tile.transform.localPosition =
-                new Vector2(gameManager.PrepareLevel.PreparedTilesPositions[i].x, gameManager.PrepareLevel.PreparedTilesPositions[i].y);
+                new Vector2(Level.GetTilesPositions()[i].x, Level.GetTilesPositions()[i].y);
             tile.gameObject.GetComponent<Tile>().AddToLists();
         }
         ScaleTiles();

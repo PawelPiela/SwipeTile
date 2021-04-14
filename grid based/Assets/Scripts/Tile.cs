@@ -7,7 +7,6 @@ public class Tile : MonoBehaviour {
     private GameManager gameManager;
     [SerializeField] private Vector3 finalScale;
     [SerializeField] private Vector2 scalingTimeRange;
-    private Vector2Int offScreenPos = new Vector2Int(-100, 0);
     private bool isScaledUp;
 
     private void Awake() {
@@ -28,8 +27,6 @@ public class Tile : MonoBehaviour {
             StartCoroutine(ScaleOverTime(scalingTime, finalScale, startScale));
             isScaledUp = false;
         }
-
-        
     }
     
     private void OnTriggerEnter2D(Collider2D collision) {
@@ -43,7 +40,6 @@ public class Tile : MonoBehaviour {
         spriteRenderer.color = Color.white;
     }
     
-
     public void AddToLists() {
         tilesManager.Tiles.Add(this.transform);
         tilesManager.TilesLeft.Add(this.transform);
@@ -67,5 +63,4 @@ public class Tile : MonoBehaviour {
             yield return null;
         } while (currentTime <= time);
     }
-    
 }

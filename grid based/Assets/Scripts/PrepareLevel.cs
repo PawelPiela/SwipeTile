@@ -4,23 +4,17 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
-public class PrepareLevel : SingletonPersistant<PrepareLevel>
+public class PrepareLevel : MonoBehaviour
 {
-    public List<Vector2Int> PreparedTilesPositions = new List<Vector2Int>();
+    private List<Vector2Int> preparedTilesPositions = new List<Vector2Int>();
     private List<string> stringList = new List<string>();
     private int cameraSize;
     public Vector2Int playerPosition;
     
     private void Awake() {
-        base.Awake();
         BetterStreamingAssets.Initialize();
-        //ReadLevelFromTxt(Level.LevelIndex);
     }
-
-    private void Start() {
-        
-    }
-
+    
     public void ReadLevelFromTxt(int levelIndex) {
         string levelFileName = ("/levels"+"/level" + levelIndex + ".txt");
         using (var stream = BetterStreamingAssets.OpenText(levelFileName)) {
@@ -32,7 +26,7 @@ public class PrepareLevel : SingletonPersistant<PrepareLevel>
         cameraSize = Convert.ToInt32(stringList[0]);
         playerPosition = GetVector2Int(stringList[1]);
         foreach (string line in stringList.Skip(2)) {
-            PreparedTilesPositions.Add(GetVector2Int(line));
+            preparedTilesPositions.Add(GetVector2Int(line));
         }
     }
     private Vector2Int GetVector2Int(string line) {
@@ -42,14 +36,17 @@ public class PrepareLevel : SingletonPersistant<PrepareLevel>
         return new Vector2Int(x, y);
     }
 
-    public int SetCameraSize() {
+    public int GetCameraSize() {
         return cameraSize;
     }
 
-    public Vector2Int SetPlayerPosition() {
+    public Vector2Int GetPlayerPosition() {
         return playerPosition;
     }
 
+    public List<Vector2Int> GetTilesPositions() {
+        return preparedTilesPositions;
+    }
     
     
 }
