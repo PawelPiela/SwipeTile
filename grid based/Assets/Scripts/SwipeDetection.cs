@@ -18,9 +18,7 @@ public class SwipeDetection : MonoBehaviour {
         set { swipedDirection = value; }
     }
 
-    private void Awake() {
-        swipedDirection = Vector2.zero;
-    }
+    private void Awake() { swipedDirection = Vector2.zero; }
 
     private void OnEnable() {
         inputManager.OnStartTouch += SwipeStart;
@@ -48,9 +46,10 @@ public class SwipeDetection : MonoBehaviour {
         (endTime - startTime) <= maxSwipeTime) {
             Vector3 direction = endPosition - startPosition;
             Vector2 direction2D = new Vector2(direction.x, direction.y).normalized;
-            if (startPosition.y != bugPos.y) {
-                SwipeDirection(direction2D);
-            }
+            // if (startPosition.y != bugPos.y) {
+            //     SwipeDirection(direction2D);
+            // }
+            SwipeDirection(direction2D);
         }
     }
     private void SwipeDirection(Vector2 direction) {

@@ -11,9 +11,7 @@ public class PrepareLevel : MonoBehaviour
     private int cameraSize;
     public Vector2Int playerPosition;
     
-    private void Awake() {
-        BetterStreamingAssets.Initialize();
-    }
+    private void Awake() { BetterStreamingAssets.Initialize(); }
     
     public void ReadLevelFromTxt(int levelIndex) {
         string levelFileName = ("/levels"+"/level" + levelIndex + ".txt");
@@ -36,17 +34,11 @@ public class PrepareLevel : MonoBehaviour
         return new Vector2Int(x, y);
     }
 
-    public int GetCameraSize() {
-        return cameraSize;
-    }
+    public int GetCameraSize() { return cameraSize; }
 
-    public Vector2Int GetPlayerPosition() {
-        return playerPosition;
-    }
+    public Vector2Int GetPlayerPosition() { return playerPosition; }
 
-    public List<Vector2Int> GetTilesPositions() {
-        return preparedTilesPositions;
-    }
+    public List<Vector2Int> GetTilesPositions() { return preparedTilesPositions; }
     
     
 }

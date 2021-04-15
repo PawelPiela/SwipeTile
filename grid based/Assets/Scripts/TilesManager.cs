@@ -11,9 +11,7 @@ public class TilesManager : MonoBehaviour
     public List<Transform> TilesLeft = new List<Transform>();
     public List<Transform> PreSpawnedTiles = new List<Transform>();
 
-    private void Awake() {
-        gameManager = GameManager.Instance;
-    }
+    private void Awake() { gameManager = GameManager.Instance; }
 
     private void OnEnable() {
         GameManager.StartEvent += StartLevel;
@@ -27,24 +25,19 @@ public class TilesManager : MonoBehaviour
         GameManager.RestartEvent -= EndLevel;
     }
 
-     private IEnumerator StartLevelCoroutine() { 
-         //yield return new WaitForSeconds(1);
+     private IEnumerator StartLevelCoroutine() {
          SetTiles();
          yield return new WaitForSeconds(1.5F);
          gameManager.LevelPrepared = true;
     }
-    private void StartLevel() {
-        //SetTiles();
-        StartCoroutine(StartLevelCoroutine());
-    }
-    private IEnumerator EndLevelCoroutine() {
+     private IEnumerator EndLevelCoroutine() {
         yield return new WaitForSeconds(1);
         ScaleTiles();
+        yield return new WaitForSeconds(1.4F);
+        MoveOffScreen();
     }
-    private void EndLevel() {
-        //ScaleTiles();
-        StartCoroutine(EndLevelCoroutine());
-    }
+    private void StartLevel() { StartCoroutine(StartLevelCoroutine()); }
+    private void EndLevel() { StartCoroutine(EndLevelCoroutine()); }
 
     private void SetTiles() {
         for (int i = 0; i < Level.GetTilesPositions().Count; i++) {
@@ -61,5 +54,10 @@ public class TilesManager : MonoBehaviour
             tile.gameObject.GetComponent<Tile>().Scale();
         }
     }
-    
+
+    private void MoveOffScreen() {
+        foreach (Transform tile in Tiles) {
+            tile.transform.position = new Vector2(-100, 0);
+        }
+    }
 }

@@ -41,7 +41,7 @@ public class PlayerTile : MonoBehaviour
     private IEnumerator StartLevelCoroutine() {
         yield return new WaitForSeconds(1.75F);
         MoveToGrid();
-        yield return new WaitForSeconds(0.5F);
+        yield return new WaitForSeconds(1F);
         EnableMovement();
 
     }
@@ -51,28 +51,21 @@ public class PlayerTile : MonoBehaviour
         MoveOffScreen();
     }
     
-    private void StartLevel() { StartCoroutine(StartLevelCoroutine());
-    }
+    private void StartLevel() { StartCoroutine(StartLevelCoroutine()); }
     
-    private void EndLevel() { StartCoroutine(EndLevelCoroutine());
-    }
+    private void EndLevel() { StartCoroutine(EndLevelCoroutine()); }
     
     private void Start() {
         transform.localScale = new Vector3(0.6F, 0.6F, 1F);
         spriteRenderer.color = Level.GetColor();
     }
-    private void Update() {
-        if(movementEnabled) MenageMovement();
-        
-    }
+    private void Update() { if(movementEnabled) MenageMovement(); }
     private void MenageMovement() {
         TileMovement();
         MovementInput();
     }
 
-    private void EnableMovement() {
-        movementEnabled = true;
-    }
+    private void EnableMovement() { movementEnabled = true; }
     
     private void TileMovement() {
         if (direction != Vector3.zero) {
@@ -100,13 +93,9 @@ public class PlayerTile : MonoBehaviour
         }
         return targetPos;
     }
-    private void MovementInput() { 
-        if (isMoving) {
-            SwipeDetection.SwipedDirection = direction;
-        }
-        if (!isMoving) {
-            direction = SwipeDetection.SwipedDirection;
-        }
+    private void MovementInput() {
+        if (isMoving) { SwipeDetection.SwipedDirection = direction; }
+        if (!isMoving) { direction = SwipeDetection.SwipedDirection; }
     }
 
     private void MoveToGrid() {

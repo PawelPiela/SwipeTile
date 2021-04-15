@@ -17,13 +17,7 @@ public class DataManager : MonoBehaviour
         Level.SetPlayerPosition(prepareLevel.GetPlayerPosition());
         Level.SetCameraSize(prepareLevel.GetCameraSize());
         Level.SetColor(colors.GetColor());
-        //StartCoroutine(EndLevelCoroutine());
-        SceneManager.LoadScene("Level");
-    }   
-    
-    private IEnumerator EndLevelCoroutine() {
-        yield return new WaitForSeconds(0.5F);
+        
         SceneManager.LoadScene("Level");
     }
-    
 }

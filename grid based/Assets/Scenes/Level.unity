@@ -4643,7 +4643,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a353f363a98bf2940a56372755bddeff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 7
   movePoint: {fileID: 1773826665}
   tilesManager: {fileID: 1730550708}
   offScreen: {x: 100, y: 0}
