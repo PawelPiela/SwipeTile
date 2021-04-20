@@ -11,9 +11,9 @@ public class SwipeDetection : MonoBehaviour {
     private float startTime;
     private Vector2 endPosition;
     private float endTime;
-    private static Vector2 swipedDirection;
+    private  Vector2 swipedDirection;
     [SerializeField] private Vector2 bugPos;
-    public static Vector2 SwipedDirection {
+    public Vector2 SwipedDirection {
         get { return swipedDirection; }
         set { swipedDirection = value; }
     }
@@ -65,6 +65,5 @@ public class SwipeDetection : MonoBehaviour {
         else if (Vector2.Dot(Vector2.right, direction) > directionTreshhold) {
             swipedDirection = Vector2.right;
         }
-        Debug.Log(swipedDirection);
     }
 }

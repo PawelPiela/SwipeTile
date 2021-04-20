@@ -11,6 +11,7 @@ public class PlayerTile : MonoBehaviour
     [SerializeField] private Transform movePoint;
     [SerializeField] private TilesManager tilesManager;
     private SpriteRenderer spriteRenderer;
+    [SerializeField] private SwipeDetection swipeDetection;
     
     private bool isMoving = false;
     private Vector3 direction = Vector3.zero;
@@ -69,6 +70,7 @@ public class PlayerTile : MonoBehaviour
     
     private void TileMovement() {
         if (direction != Vector3.zero) {
+            Debug.Log("direction: " + direction);
             targetPos = SetNextWaypoint(direction);
             isMoving = true;
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(targetPos.x, targetPos.y, targetPos.z), moveSpeed * Time.deltaTime);
@@ -91,11 +93,12 @@ public class PlayerTile : MonoBehaviour
                 isMoveFinished = true;
             }
         }
+        Debug.Log("pos: " + targetPos);
         return targetPos;
     }
     private void MovementInput() {
-        if (isMoving) { SwipeDetection.SwipedDirection = direction; }
-        if (!isMoving) { direction = SwipeDetection.SwipedDirection; }
+        if (isMoving) { swipeDetection.SwipedDirection = direction; }
+        if (!isMoving) { direction = swipeDetection.SwipedDirection; }
     }
 
     private void MoveToGrid() {

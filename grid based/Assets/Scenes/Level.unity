@@ -4646,6 +4646,7 @@ MonoBehaviour:
   moveSpeed: 7
   movePoint: {fileID: 1773826665}
   tilesManager: {fileID: 1730550708}
+  swipeDetection: {fileID: 1235419111}
   offScreen: {x: 100, y: 0}
 --- !u!212 &1861847232
 SpriteRenderer:
