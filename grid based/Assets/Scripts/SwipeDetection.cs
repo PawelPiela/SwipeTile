@@ -65,5 +65,6 @@ public class SwipeDetection : MonoBehaviour {
         else if (Vector2.Dot(Vector2.right, direction) > directionTreshhold) {
             swipedDirection = Vector2.right;
         }
+        //Debug.Log(swipedDirection);
     }
 }

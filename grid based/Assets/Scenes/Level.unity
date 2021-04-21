@@ -1521,6 +1521,36 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2031812024389106378, guid: b17ce2540dbc06d41824724c325e8edd, type: 3}
   m_PrefabInstance: {fileID: 451631769}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &461714796
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 461714797}
+  m_Layer: 0
+  m_Name: NextMove
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &461714797
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461714796}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1083648014}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &465216719
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2622,6 +2652,7 @@ Transform:
   - {fileID: 492421615}
   - {fileID: 1730550707}
   - {fileID: 1219301045}
+  - {fileID: 461714797}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4645,8 +4676,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 7
   movePoint: {fileID: 1773826665}
+  nextMove: {fileID: 461714797}
   tilesManager: {fileID: 1730550708}
   swipeDetection: {fileID: 1235419111}
+  isMoving: 0
+  direction: {x: 0, y: 0, z: 0}
   offScreen: {x: 100, y: 0}
 --- !u!212 &1861847232
 SpriteRenderer:
