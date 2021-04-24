@@ -4675,8 +4675,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 7
-  movePoint: {fileID: 1773826665}
-  nextMove: {fileID: 461714797}
+  moveToPoint: {fileID: 1773826665}
+  nextStepPos: {fileID: 461714797}
   tilesManager: {fileID: 1730550708}
   swipeDetection: {fileID: 1235419111}
   isMoving: 0

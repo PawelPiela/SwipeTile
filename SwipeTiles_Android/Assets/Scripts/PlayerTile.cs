@@ -8,16 +8,14 @@ public class PlayerTile : MonoBehaviour
 {
     private GameManager gameManager;
     [SerializeField] private float moveSpeed;
-    [SerializeField] private Transform movePoint;
-    [SerializeField] private Transform nextMove;
+    [SerializeField] private Transform moveToPoint;
+    [SerializeField] private Transform nextStepPos;
     [SerializeField] private TilesManager tilesManager;
-    private SpriteRenderer spriteRenderer;
     [SerializeField] private SwipeDetection swipeDetection;
+    private SpriteRenderer spriteRenderer;
     
-    public bool isMoving = false;
-    public Vector3 direction = Vector3.zero;
-    private Vector3 targetPos;
-
+    private bool isMoving = false;
+    private Vector2 direction = Vector2.zero;
     [SerializeField] private Vector2 offScreen;
 
     //public int moveCount = 0;
@@ -32,15 +30,11 @@ public class PlayerTile : MonoBehaviour
     private void OnEnable() {
         GameManager.StartEvent += StartLevel;
         GameManager.EndEvent += EndLevel;
-        GameManager.RestartEvent += EndLevel;
-        SwipeDetection.Swiped += TileMove;
     }
 
     private void OnDisable() {
         GameManager.StartEvent -= StartLevel;
         GameManager.EndEvent -= EndLevel;
-        GameManager.RestartEvent -= EndLevel;
-        SwipeDetection.Swiped -= TileMove;
     }
 
     private IEnumerator StartLevelCoroutine() {
@@ -69,91 +63,48 @@ public class PlayerTile : MonoBehaviour
     }
 
     private void Update() {
-        if (movementEnabled) MenageMovement();
-    }
-
-    private void MenageMovement() {
-        //TileMovement();
-        MovementInput();
-        //TileMove();
+        if (movementEnabled){
+            DirectionInput();
+            Movement();
+        }
     }
 
     private void EnableMovement() {
         movementEnabled = true;
     }
 
-    private void TileMove() {
-        if (direction != Vector3.zero) {
+    private void Movement() {
+        if (direction != Vector2.zero) {
+            bool moveCalculated = false;
             isMoving = true;
-            bool moveEnded = false;
-            while (!moveEnded) {
-                Vector2 currentPos = movePoint.transform.position;
-                nextMove.transform.position = new Vector2((currentPos.x + direction.x), (currentPos.y + direction.y));
-                if (tilesManager.Tiles.Find(tilePos => tilePos.transform.position == nextMove.transform.position)) {
-                    Vector3 nextPos = movePoint.transform.position + new Vector3(direction.x, direction.y);
-                    movePoint.transform.position = nextPos;
+            while (!moveCalculated) {
+                Vector2 currentPos = moveToPoint.transform.position;
+                nextStepPos.transform.position = new Vector2((currentPos.x + direction.x), (currentPos.y + direction.y));
+                if (tilesManager.Tiles.Find(tilePos => tilePos.transform.position == nextStepPos.transform.position)) {
+                    Vector3 nextPos = moveToPoint.transform.position + new Vector3(direction.x, direction.y);
+                    moveToPoint.transform.position = nextPos;
                 }
-                else {
-                    moveEnded = true;
-                }
-            }
-            if(isMoving) StartCoroutine(Move());
+                else { moveCalculated = true; }
+            }  
+            Move();  
         }
     }
 
-    private IEnumerator Move() {
-        if (direction != Vector3.zero) {
-            Vector3 target = movePoint.transform.position;
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(target.x, target.y, target.z),
-                moveSpeed * Time.deltaTime);
-            if (transform.position == target) {
-                direction = Vector3.zero;
-                isMoving = false;
-                Debug.Log("123");
-               
-            }
-        }
-        yield return new WaitForSeconds(5f);
-    }
-    
-    private void MovementInput() {
+    private void Move() {
         if (isMoving) {
-            swipeDetection.SwipedDirection = direction;
-        }
-
-        if (!isMoving) {
-            direction = swipeDetection.SwipedDirection;
+            Vector3 target = moveToPoint.transform.position;
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(target.x, target.y, target.z), moveSpeed * Time.deltaTime);
+            if (transform.position == target && isMoving) {
+                Handheld.Vibrate();
+                isMoving = false;
+            }
         }
     }
     
-    // private void TileMovement() {
-    //     if (direction != Vector3.zero) {
-    //         Debug.Log("direction: " + direction);
-    //         targetPos = SetNextWaypoint(direction);
-    //         isMoving = true;
-    //         transform.position = Vector3.MoveTowards(transform.position, new Vector3(targetPos.x, targetPos.y, targetPos.z), moveSpeed * Time.deltaTime);
-    //         if (transform.position == movePoint.transform.position) {
-    //             isMoving = false;
-    //             direction = Vector3.zero;
-    //         }
-    //     }
-    // }
-
-    // private Vector3 SetNextWaypoint(Vector3 direction) {
-    //     bool isMoveFinished = false;
-    //     while (!isMoveFinished) {
-    //         Vector3 prevPos = movePoint.transform.position;
-    //         movePoint.transform.position = movePoint.transform.position + new Vector3(direction.x, direction.y, direction.z);
-    //         if (tilesManager.Tiles.Find(tilePos => tilePos.position == movePoint.transform.position)) {
-    //             targetPos = movePoint.transform.position;
-    //         } else {
-    //             movePoint.transform.position = new Vector3(prevPos.x, prevPos.y, prevPos.z);
-    //             isMoveFinished = true;
-    //         }
-    //     }
-    //     Debug.Log("pos: " + targetPos);
-    //     return targetPos;
-    // }
+    private void DirectionInput() {
+        if (isMoving) { swipeDetection.SwipedDirection = Vector2.zero; }
+        if (!isMoving) { direction = swipeDetection.SwipedDirection; }
+    }
     
     private void MoveToGrid() {
         transform.localPosition = new Vector2(Level.GetPlayerPosition().x, Level.GetPlayerPosition().y);
@@ -161,12 +112,12 @@ public class PlayerTile : MonoBehaviour
     }
 
     private void MoveOffScreen() {
-        movePoint.transform.localPosition = Vector2.zero;
+        moveToPoint.transform.localPosition = Vector2.zero;
         transform.position = new Vector2(offScreen.x, offScreen.y);
     }
 
     private void RemoveParentFromMovePoint() {
-        movePoint.transform.position = transform.position;
-        movePoint.transform.parent = null;
+        moveToPoint.transform.position = transform.position;
+        moveToPoint.transform.parent = null;
     }
 }

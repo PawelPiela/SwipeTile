@@ -16,13 +16,11 @@ public class TilesManager : MonoBehaviour
     private void OnEnable() {
         GameManager.StartEvent += StartLevel;
         GameManager.EndEvent += EndLevel;
-        GameManager.RestartEvent += EndLevel;
     }
 
     private void OnDisable() {
         GameManager.StartEvent -= StartLevel;
         GameManager.EndEvent -= EndLevel;
-        GameManager.RestartEvent -= EndLevel;
     }
 
      private IEnumerator StartLevelCoroutine() {

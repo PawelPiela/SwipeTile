@@ -3,8 +3,7 @@ using UnityEngine;
 
 public class SwipeDetection : MonoBehaviour {
 
-    public delegate void Swipe();
-    public static event Swipe Swiped;
+    
 
     [SerializeField] private InputManager inputManager;
     [SerializeField] private float minSwipeDistance = 0.2f;
@@ -18,7 +17,7 @@ public class SwipeDetection : MonoBehaviour {
     [SerializeField] private Vector2 bugPos;
     public Vector2 SwipedDirection {
         get { return swipedDirection; }
-        set { swipedDirection = value; }
+        set { swipedDirection = value; } 
     }
 
     private void Awake() { swipedDirection = Vector2.zero; }
@@ -51,9 +50,7 @@ public class SwipeDetection : MonoBehaviour {
             Vector2 direction2D = new Vector2(direction.x, direction.y).normalized;
             if (startPosition.y != bugPos.y) {
                 SwipeDirection(direction2D);
-                if(Swiped != null )Swiped();
             }
-            //SwipeDirection(direction2D);
         }
     }
     private void SwipeDirection(Vector2 direction) {
@@ -69,6 +66,5 @@ public class SwipeDetection : MonoBehaviour {
         else if (Vector2.Dot(Vector2.right, direction) > directionTreshhold) {
             swipedDirection = Vector2.right;
         }
-        //Debug.Log(swipedDirection);
     }
 }

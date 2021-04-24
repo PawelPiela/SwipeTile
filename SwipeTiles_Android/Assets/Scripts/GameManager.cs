@@ -11,9 +11,7 @@ public class GameManager : Singleton<GameManager> {
     public static event LevelStart StartEvent;
     public delegate void LevelEnd();
     public static event LevelEnd EndEvent;
-    public delegate void LevelRestart();
-    public static event LevelRestart RestartEvent;
-
+    
     private Level level;
     [SerializeField] InputManager inputManager;
     public TilesManager TilesManager;
@@ -34,8 +32,6 @@ public class GameManager : Singleton<GameManager> {
         base.Awake();
         MainCamera.orthographicSize = 2;
     }
-    
-    
     
     public void Start() {
         levelFinished = false;
@@ -64,8 +60,15 @@ public class GameManager : Singleton<GameManager> {
         yield return new WaitForSeconds(2.5F);
         SceneManager.LoadScene("LoadingData");
     }
-    
-    public void RestartLevel() {
+    private void OnEnable() {
+        UI.OnRestartLevel += RestartLevel; 
+    }
+    private void OnDisable() {
+        UI.OnRestartLevel -= RestartLevel; 
+    }
+    private void RestartLevel() {
         
     }
+
+
 }

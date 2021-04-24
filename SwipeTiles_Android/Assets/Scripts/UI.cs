@@ -6,6 +6,8 @@ using TMPro;
 
 public class UI : MonoBehaviour
 {
+    public delegate void RestartLevel();
+    public static event RestartLevel OnRestartLevel;
     [SerializeField] private TextMeshProUGUI textObject;
     [SerializeField] private string text;
     private GameManager gameManager;
